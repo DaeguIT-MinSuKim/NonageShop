@@ -1,0 +1,3 @@
+-- 접속자 확인
+SELECT USER FROM DUAL;
+
