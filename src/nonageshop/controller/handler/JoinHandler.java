@@ -36,7 +36,7 @@ public class JoinHandler implements Command {
         member.setName(request.getParameter("name"));
         member.setEmail(request.getParameter("email"));
         member.setZipNum(request.getParameter("zipNum"));
-        member.setAddress(request.getParameter("addr1") + request.getParameter("addr2"));
+        member.setAddress(request.getParameter("addr1") +" "+ request.getParameter("addr2"));
         member.setPhone(request.getParameter("phone")); 
         return member;
     }

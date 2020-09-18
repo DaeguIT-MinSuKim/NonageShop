@@ -30,4 +30,8 @@ public class MemberService {
     public int joinMember(Member member) {
         return dao.insertMember(member);
     }
+    
+    public Member getMember(String id) {
+        return dao.getMember(id);
+    }
 }

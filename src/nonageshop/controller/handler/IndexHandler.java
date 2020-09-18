@@ -21,17 +21,13 @@ public class IndexHandler implements Command {
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getMethod().equalsIgnoreCase("get")) {
-            ArrayList<Product> newProductList = service.newProducts();
-            ArrayList<Product> bestProductList = service.bestProducts();
-            
-            request.setAttribute("newProductList", newProductList);
-            request.setAttribute("bestProductList", bestProductList);
-
-            return "index.jsp";
-        }else {
-            return null;
-        }
+        ArrayList<Product> newProductList = service.newProducts();
+        ArrayList<Product> bestProductList = service.bestProducts();
+        
+        request.setAttribute("newProductList", newProductList);
+        request.setAttribute("bestProductList", bestProductList);
+        
+        return "index.jsp";
     }
 
 }

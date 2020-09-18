@@ -30,7 +30,7 @@
        <c:choose>
        <c:when test="${empty sessionScope.loginUser}">
        <li>         
-         <a href="NonageServlet?command=login_form" style="width:110px;">LOGIN(CUSTOMER</a>   
+         <a href="loginform.do" style="width:110px;">LOGIN(CUSTOMER</a>   
 	     <a href="NonageServlet?command=admin_login_form" style="width:100px;">| ADMIN)</a>
 	   </li>		       
        <li>/</li>
@@ -40,7 +40,7 @@
        <li style="color:orange">
          ${sessionScope.loginUser.name}(${sessionScope.loginUser.id})
        </li>
-       <li><a href="NonageServlet?command=logout">LOGOUT</a></li>
+       <li><a href="logout.do">LOGOUT</a></li>
        </c:otherwise>       
        </c:choose>
        <li>/</li>

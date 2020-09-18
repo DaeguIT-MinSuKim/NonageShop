@@ -50,11 +50,11 @@ table#zipcode a:hover{
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script type="text/javascript">
-function result(zipNum,sido,gugun,dong) {
-    $("#zipNum", window.opener.document).val(zipNum);
-    $("#addr1", window.opener.document).val(sido+" "+gugun+" "+dong);
-   self.close();
-};
+	function result(zipNum,sido,gugun,dong) {
+	    $("#zipNum", window.opener.document).val(zipNum);
+	    $("#addr1", window.opener.document).val(sido+" "+gugun+" "+dong);
+	   self.close();
+	};
 </script>
 </head>
 <body>
@@ -73,8 +73,7 @@ function result(zipNum,sido,gugun,dong) {
     <tr>
       <td>${address.zipNum}</td>
         <td>
-          <a href="#" onclick="return result('${address.zipNum}'
-,'${address.sido}', '${address.gugun}','${address.dong}')">
+          <a href="#" onclick="return result('${address.zipNum}','${address.sido}', '${address.gugun}','${address.dong}')">
             ${address.sido} ${address.gugun} ${address.dong} 
           </a>
         </td>
