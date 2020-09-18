@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import nonageshop.dao.AddressDao;
 import nonageshop.dto.Address;
-import nonageshop.dto.Product;
 
 public class AddressDaoImpl implements AddressDao {
     private static final AddressDaoImpl instance = new AddressDaoImpl();

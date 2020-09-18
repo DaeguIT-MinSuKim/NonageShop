@@ -5,7 +5,7 @@
 <%@ include file="sub_menu.html" %>   
   <article>
     <h2>Join Us</h2>
-    <form id="join" action="join.do" method="post" name="formm">
+    <form id="join" action="join.do" method="post"
       <fieldset>
         <legend>Basic Info</legend>
         <label>User ID</label>
@@ -18,18 +18,19 @@
         <label>Name</label>
         	<input type="text"      id="name" name="name"><br> 
         <label>E-Mail</label>
-        	<input type="text"      id="email" name="email"><br>
+        	<input type="email"      id="email" name="email"><br>
       </fieldset>
       <fieldset>
         <legend>Optional</legend>
         <label>Zip Code</label> 
-	        <input type="text"       name="zipNum"   size="10" >      
-	        <input type="button"     id="findZipNum" value="주소 찾기" class="dup" onclick="post_zip()"><br>
+	        <input type="text"       id="zipNum" name="zipNum"   size="10" >      
+	        <input type="button"     id="findZipNum" value="주소 찾기" class="dup"><br>
         <label>Address</label> 
-	        <input type="text"        name="addr1"   size="50">
-	        <input type="text"        name="addr2"   size="25"> <br>
-	        <label>Phone Number</label> 
-	        <input  type="text"       name="phone"><br>
+	        <input type="text"       id="addr1" name="addr1"   size="50">
+	    <label></label>
+			<input type="text"       id="addr2" name="addr2"   size="25"> <br>
+	    <label>Phone Number</label> 
+	        <input  type="tel"       name="phone"><br>
       </fieldset>
       <div class="clear"></div>
       <div id="buttons">
@@ -39,4 +40,3 @@
     </form>
   </article>
 <%@ include file="../footer.jsp" %>
-  

@@ -18,8 +18,7 @@ function go_save(dupCheck) {
       alert("이메일을 입력해 주세요.");
       $('#email').val().focus();
     } else {
-      document.formm.action = "NonageServlet?command=join";
-      document.formm.submit();
+      $('#join').submit();
     }
   }
 
@@ -57,13 +56,8 @@ $(function(){
         });
     });
     
-/*    function post_zip() {
-        var url = "NonageServlet?command=find_zip_num";
-        window.open( url, "_blank_1",
-      "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=300, top=300, left=300, ");
-      }*/
-    
     $('#findZipNum').on("click", function(){
-        
+        window.open( "findZipNum.do", "_blank_1",
+        "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=300, top=300, left=300, ");
     });
 });
