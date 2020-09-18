@@ -7,11 +7,38 @@ public class Member {
     private String pwd; /* 회원암호 */
     private String name; /* 회원이름 */
     private String email; /* 회원이메일 */
-    private String zip_num; /* 우편번호 */
+    private String zipNum; /* 우편번호 */
     private String address; /* 주소 */
     private String phone; /* 전화번호 */
     private String leave_yn; /* 탈퇴여부 */
-    private Date join_date;/* 가입일 */
+    private Date joinDate;/* 가입일 */
+
+    public Member() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public Member(String id, String pwd, String name, String email, String zipNum, String address, String phone) {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+        this.zipNum = zipNum;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public Member(String id, String pwd, String name, String email, String zipNum, String address, String phone,
+            String leave_yn, Date joinDate) {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.email = email;
+        this.zipNum = zipNum;
+        this.address = address;
+        this.phone = phone;
+        this.leave_yn = leave_yn;
+        this.joinDate = joinDate;
+    }
 
     public String getId() {
         return id;
@@ -45,12 +72,12 @@ public class Member {
         this.email = email;
     }
 
-    public String getZip_num() {
-        return zip_num;
+    public String getZipNum() {
+        return zipNum;
     }
 
-    public void setZip_num(String zip_num) {
-        this.zip_num = zip_num;
+    public void setZipNum(String zipNum) {
+        this.zipNum = zipNum;
     }
 
     public String getAddress() {
@@ -77,19 +104,19 @@ public class Member {
         this.leave_yn = leave_yn;
     }
 
-    public Date getJoin_date() {
-        return join_date;
+    public Date getJoinDate() {
+        return joinDate;
     }
 
-    public void setJoin_date(Date join_date) {
-        this.join_date = join_date;
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Member [id=%s, pwd=%s, name=%s, email=%s, zip_num=%s, address=%s, phone=%s, leave_yn=%s, join_date=%s]",
-                id, pwd, name, email, zip_num, address, phone, leave_yn, join_date);
+                id, pwd, name, email, zipNum, address, phone, leave_yn, joinDate);
     }
 
 }

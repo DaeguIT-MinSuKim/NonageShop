@@ -51,5 +51,9 @@ SELECT NO, NAME, KIND, PRICE, SALEPRICE, MARGIN, CONTENT, IMAGE, DEL_YN, BEST_YN
  WHERE kind='5';
 
 
-
+-- member
+insert into member(id, pwd, name, zip_num, address, phone, email) values
+('one', '1111', '김나리', '133-110', '서울시성동구성수동1가 1번지21호', '017-777-7777', 'knari@test.co.kr');
+insert into member(id, pwd, name, zip_num, address, phone, email) values
+('two', '2222', '이백합', '130-120', '서울시송파구잠실2동 리센츠 아파트 201동 505호', '011-123-4567', 'lbh@test.co.kr');
 

@@ -1,7 +1,5 @@
 package nonageshop.dao.impl;
 
-import static org.junit.Assert.fail;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -10,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import nonageshop.ds.JdbcUtil;
-import nonageshop.ds.JndiDS;
 import nonageshop.dto.Product;
 
 public class ProductDaoImplTest {
