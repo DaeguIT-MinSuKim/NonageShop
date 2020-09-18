@@ -1,51 +1,69 @@
-function go_save() {
-  if (document.formm.id.value == "") {
-    alert("아이디를 입력하여 주세요.");
-    document.formm.id.focus();
-  } else if (document.formm.id.value != document.formm.reid.value) {
-    alert("중복확인을 클릭하여 주세요.");
-    document.formm.id.focus();
-  } else if (document.formm.pwd.value == "") {
-    alert("비밀번호를 입력해 주세요.");
-    document.formm.pwd.focus();
-  } else if ((document.formm.pwd.value != document.formm.pwdCheck.value)) {
-    alert("비밀번호가 일치하지 않습니다.");
-    document.formm.pwd.focus();
-  } else if (document.formm.name.value == "") {
-    alert("이름을 입력해 주세요.");
-    document.formm.name.focus();
-  } else if (document.formm.email.value == "") {
-    alert("이메일을 입력해 주세요.");
-    document.formm.email.focus();
-  } else {
-    document.formm.action = "NonageServlet?command=join";
-    document.formm.submit();
+function go_save(dupCheck) {
+    if ($('#id').val().length == 0) {
+      alert("아이디를 입력하여 주세요.");
+      $('#id').focus();
+    } else if (!dupCheck) {
+      alert("중복확인을 클릭하여 주세요.");
+      $('#dup').focus();
+    } else if ($('#pwd').val().length == 0) {
+      alert("비밀번호를 입력해 주세요.");
+      $('#pwd').focus();
+    } else if ($('#pwd').val() != $('#pwdCheck').val()) {
+      alert("비밀번호가 일치하지 않습니다.");
+      $('#pwd').focus();
+    } else if ($('#name').val().length == 0) {
+      alert("이름을 입력해 주세요.");
+      $('#name').focus();
+    } else if ($('#email').val().length == 0) {
+      alert("이메일을 입력해 주세요.");
+      $('#email').val().focus();
+    } else {
+      document.formm.action = "NonageServlet?command=join";
+      document.formm.submit();
+    }
   }
-}
 
-function idcheck() {
-  if (document.formm.id.value == "") {
-    alert('아이디를 입력하여 주십시오.');
-    document.formm.id.focus();
-    return;
-  }
-  var url = "NonageServlet?command=id_check_form&id=" 
-+ document.formm.id.value;
-  window.open( url, "_blank_1",
-"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=330, height=200");
-}
-
-function post_zip() {
-  var url = "NonageServlet?command=find_zip_num";
-  window.open( url, "_blank_1",
-"toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=300, top=300, left=300, ");
-}
-
-function go_next() {
-  if (document.formm.okon1[0].checked == true) {
-    document.formm.action = "NonageServlet?command=join_form";
-    document.formm.submit();
-  } else if (document.formm.okon1[1].checked == true) {
-    alert('약관에 동의하셔야만 합니다.');
-  }
-}
+$(function(){
+    var dupCheck=false;
+    
+    $("#next").on("click", function(){
+        if ($("input:radio[id='okon1']").is(":checked")) {
+            location.href="join.do";
+        } else {
+            alert('약관에 동의하셔야만 합니다.');
+        }
+    });
+    
+    $('#reg').on("click", function(){
+        go_save(dupCheck);
+    });
+    
+    $('#dup').on("click", function(){
+        if ($('#id').val().length == 0) {
+            alert('아이디를 입력하여 주십시오.');
+            $('#id').focus();
+            return;
+        }
+        var member = {id : $('#id').val()};
+        $.get("idCheck.do", member, function(data){
+            if (data == 1){
+                alert("사용가능한 아이디");
+                dupCheck = true;
+            }else{
+                alert("중복 아이디");
+                $('#id').select();
+                $('#id').focus();
+            }
+        });
+    });
+    
+/*    function post_zip() {
+        var url = "NonageServlet?command=find_zip_num";
+        window.open( url, "_blank_1",
+      "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=300, top=300, left=300, ");
+      }*/
+    
+    $('#findZipNum').on("click", function(){
+        
+    });
+});

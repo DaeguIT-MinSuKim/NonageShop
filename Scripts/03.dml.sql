@@ -57,3 +57,5 @@ insert into member(id, pwd, name, zip_num, address, phone, email) values
 insert into member(id, pwd, name, zip_num, address, phone, email) values
 ('two', '2222', '이백합', '130-120', '서울시송파구잠실2동 리센츠 아파트 201동 505호', '011-123-4567', 'lbh@test.co.kr');
 
+
+

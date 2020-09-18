@@ -34,7 +34,7 @@
 	     <a href="NonageServlet?command=admin_login_form" style="width:100px;">| ADMIN)</a>
 	   </li>		       
        <li>/</li>
-       <li><a href="NonageServlet?command=contract">JOIN</a></li>
+       <li><a href="contract.do">JOIN</a></li>
        </c:when>
        <c:otherwise>
        <li style="color:orange">

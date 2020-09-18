@@ -327,7 +327,7 @@ form #buttons {
 	margin: 20px 0 0 0;
 }
 
-form  .submit,form  .cancel {
+.submit, .cancel {
 	height: 30px; /* 버튼의 세로 크기를 정의합니다. */
 	width: 150px; /* 버튼의 가로 크기를 정의합니다. */
 	border: 1px solid #666; /* 버튼의 테두리를 정의합니다. */
@@ -340,10 +340,10 @@ form  .submit,form  .cancel {
 	margin: 0 0 0 20px;
 }
 
-form  .submit {
+.submit {
 	background-image: url(../images/submit_back.jpg);
 }
 
-form  .cancel {
+.cancel {
 	background-image: url(../images/cancel_back.jpg);	
 }
