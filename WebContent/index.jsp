@@ -16,7 +16,7 @@
     <div id="bestProduct">         
       <c:forEach items="${newProductList }"  var="product">
         <div id="item">
-          <a href="NonageServlet?command=product_detail&no=${product.no}">
+          <a href="productDetail.do?no=${product.no}">
             <img src="product_images/${product.image}" />
             <h3> ${product.name} </h3>    
             <p>${product.salePrice} </p>
@@ -30,10 +30,10 @@
       <div id="bestProduct">         
         <c:forEach items="${bestProductList}"  var="product">
           <div id="item">
-           <a href="NonageServlet?command=product_detail&no=${product.no}">
+           <a href="productDetail.do?no=${product.no}">
              <img src="product_images/${product.image}" />
            <h3> ${product.name} </h3>    
-           <p>${productVO.salePrice} </p>
+           <p>${product.salePrice} </p>
         </a>  
       </div>
     </c:forEach>      
