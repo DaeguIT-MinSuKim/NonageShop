@@ -17,7 +17,12 @@ public class Member {
         // TODO Auto-generated constructor stub
     }
 
-    public Member(String id, String pwd, String name, String email, String zipNum, String address, String phone) {
+    public Member(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public Member(String id, String pwd, String name, String email, String zipNum, String address, String phone) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;

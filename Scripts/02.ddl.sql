@@ -33,13 +33,14 @@ CREATE TABLE member (
 
 /* 장바구니 
  * no sequence */
+DROP TABLE cart;
 CREATE TABLE cart (
 	no NUMBER(5) NOT NULL, /* 장바구니번호 */
 	pno NUMBER(5), /* 상품번호 */
 	memberId VARCHAR2(20), /* 회원아이디 */
-	quantity NUMBER(5), /* 수량 */
-	result_yn CHAR(1), /* 처리완료여부 */
-	reg_date DATE /* 등록일 */
+	quantity NUMBER(5) default 1, /* 수량 */
+	result CHAR(1) DEFAULT 1, /* 처리완료여부 */
+	reg_date DATE DEFAULT sysdate/* 등록일 */
 );
 
 
@@ -206,3 +207,5 @@ BEGIN
 		SELECT QNA_NO_SEQ.NEXTVAL INTO :NEW.NO FROM DUAL;
 	END IF;
 END; 
+
+

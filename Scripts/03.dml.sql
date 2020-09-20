@@ -58,4 +58,16 @@ insert into member(id, pwd, name, zip_num, address, phone, email) values
 ('two', '2222', '이백합', '130-120', '서울시송파구잠실2동 리센츠 아파트 201동 505호', '011-123-4567', 'lbh@test.co.kr');
 
 
+-- cart
+insert into cart(memberid, pno, quantity) values('one', 1, 1);
+select * from cart_view where MEMBERID='one' order by no DESC;
 
+create or replace view cart_view
+as
+SELECT c.NO , c.MEMBERID , c.PNO , m.NAME mname, p.NAME pname, c.QUANTITY, c.REG_DATE, p.SALEPRICE , c.RESULT 
+  FROM cart c JOIN MEMBER m ON c.MEMBERID = m.ID JOIN PRODUCT p ON c.PNO =p."NO" 
+ WHERE result = '1';
+
+SELECT NO, MEMBERID, PNO, MNAME, PNAME, QUANTITY, REG_DATE, SALEPRICE, RESULT 
+  FROM CART_VIEW WHERE MEMBERID='one' 
+ ORDER BY NO DESC;
