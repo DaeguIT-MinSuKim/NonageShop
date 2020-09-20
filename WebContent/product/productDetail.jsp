@@ -6,7 +6,7 @@
   <article>
     <h1> Item </h1>
     <div id="itemdetail" >
-      <form  method="post" name="formm">    
+      <form  method="post" id="cartform">    
         <fieldset>
           <legend> Item detail Info</legend>  
           <a href="productDetail.do?no=${product.no}">         
@@ -18,7 +18,7 @@
           <label> 가 격 :  </label>  
           <p> ${product.salePrice} 원</p>  
           <label> 수 량 : </label>
-          <input  type="text"      name="quantity"  size="2"      value="1"><br>
+          <input  type="number"      id="quantity" name="quantity"  size="2"      value="1"><br>
           <input  type="hidden"    name="no"       value="${product.no}"><br>
         </fieldset>
         <div class="clear"></div>

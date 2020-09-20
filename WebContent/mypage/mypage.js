@@ -1,35 +1,22 @@
 function go_cart() {
-  if (document.formm.quantity.value == "") {
+  if ($('#quantity').val().length == 0) {
     alert("수량을 입력하여 주세요.");
-    document.formm.quantity.focus();
+    $('#quantity').focus();
   } else {
-    document.formm.action = "NonageServlet?command=cart_insert";
-    document.formm.submit();
+	$("#cartform").attr("action", "cartInsert.do");
+    $('#cartform').submit();
   }
 }
 
 function go_cart_delete() {
-  var count = 0;
+  var count =  $("input[type='checkbox']:checked").length;
+  alert("" + count);
 
-  if (document.formm.cseq.length == undefined) {
-    if (document.formm.cseq.checked == true) {
-      count++;
-    }
-  }
-
-  for ( var i = 0; i < document.formm.cseq.length; i++) {
-    alert("" + document.formm.cseq[i].checked);
-    if (document.formm.cseq[i].checked == true) {
-      count++;
-      alert("" + count);
-    }
-  }
   if (count == 0) {
     alert("삭제할 항목을 선택해 주세요.");
-
   } else {
-    document.formm.action = "NonageServlet?command=cart_delete";
-    document.formm.submit();
+	$("#cartform").attr("action", "cartDelete.do");
+    $('#cartform').submit();
   }
 }
 
