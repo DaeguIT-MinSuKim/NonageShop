@@ -45,3 +45,18 @@ select * from cart_view where MEMBERID='one' order by no DESC;
 SELECT NO, MEMBERID, PNO, MNAME, PNAME, QUANTITY, REG_DATE, SALEPRICE, RESULT 
   FROM CART_VIEW WHERE MEMBERID='one' 
  ORDER BY NO DESC;
+
+
+-- ORDER
+insert into orders(id) values('one');
+insert into orders(id) values('one');
+insert into orders(id) values('two');
+
+-- order_detail
+insert into order_detail(ono, pno, quantity) values(1, 1, 1);
+insert into order_detail(ono, pno, quantity) values(1, 2, 5);
+insert into order_detail(ono, pno, quantity) values(2, 4, 3);
+insert into order_detail(ono, pno, quantity) values(3, 3, 1);
+insert into order_detail(ono, pno, quantity) values(3, 2, 1);
+insert into order_detail(ono, pno, quantity) values(3, 6, 2);
+insert into order_detail(ono, pno, quantity) values(3, 1, 2);

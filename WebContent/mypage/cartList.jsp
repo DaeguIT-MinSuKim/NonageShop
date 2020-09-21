@@ -37,7 +37,7 @@
           <th colspan="2"> 
             <fmt:formatNumber value="${totalPrice}" pattern="#,###.##원" /><br>
           </th> 
-          <th><a href="#" onclick="go_cart_delete()"><h3>삭제하기</h3></a></th>                       
+          <th><a href="#" id="cart_delete"><h3>삭제하기</h3></a></th>                       
         </tr> 
       </table> 
     </c:otherwise>  
@@ -46,9 +46,9 @@
     <div class="clear"></div>
      
     <div id="buttons" style="float: right">
-      <input type="button" value="쇼핑 계속하기" class="cancel"  onclick="location.href='index.do'">    
+      <input type="button" id="continue" value="쇼핑 계속하기" class="cancel" >    
       <c:if test= "${cartList.size() != 0}">
-      <input type="button" value="주문하기"  class="submit" onclick="go_order_insert()">
+      <input type="button" value="주문하기"  id="go_order_insert" class="submit" >
       </c:if>
      </div>
     </form>

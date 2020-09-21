@@ -82,4 +82,15 @@ public class CartDaoImpl implements CartDao {
 	    }
 	}
 
+    @Override
+    public int updateCartResult(Cart cart) {
+        String sql = "update cart set result=2 where no=?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, cart.getNo());
+            return pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new CustomSQLException(e);
+        }
+    }
+
 }

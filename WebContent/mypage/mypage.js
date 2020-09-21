@@ -1,3 +1,26 @@
+$(function(){
+    $('#cart_delete').on("click", function(){
+        go_cart_delete();
+    });
+    
+    $('#continue').on("click", function(){
+        location.href='index.do';
+    });
+    
+    $('#gocart').on("click", function(){
+        go_cart();
+    });
+    
+    $('#goorder').on("click", function(){
+        go_order();
+    });
+    
+    $('#go_order_insert').on("click", function(){
+        go_order_insert();
+    });
+});
+
+
 function go_cart() {
   if ($('#quantity').val().length == 0) {
     alert("수량을 입력하여 주세요.");

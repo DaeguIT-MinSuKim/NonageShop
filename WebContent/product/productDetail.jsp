@@ -23,8 +23,8 @@
         </fieldset>
         <div class="clear"></div>
         <div id="buttons">
-          <input type="button" value="장바구니에 담기"   class="submit"    onclick="go_cart()"> 
-          <input type="button" value="즉시 구매"       class="submit"    onclick="go_order()"> 
+          <input type="button" value="장바구니에 담기"   id="gocart" class="submit" > 
+          <input type="button" value="즉시 구매"       id="goorder" class="submit" > 
           <input type="reset"  value="취소"           class="cancel">
         </div>
       </form>  

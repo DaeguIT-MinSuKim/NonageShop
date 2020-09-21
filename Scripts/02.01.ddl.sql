@@ -45,21 +45,23 @@ CREATE TABLE cart (
 
 
 /* 주문 */
+DROP TABLE orders;
 CREATE TABLE orders (
 	no NUMBER(5) NOT NULL PRIMARY KEY , /* 주문번호 */
 	id VARCHAR2(20), /* 주문아이디 */
-	order_date DATE /* 주문일 */
+	order_date DATE DEFAULT sysdate /* 주문일 */
 );
 
 
 /* 주문상세 
  * no sequence */
+DROP TABLE order_detail;
 CREATE TABLE order_detail (
 	no NUMBER(5) NOT NULL PRIMARY KEY , /* 주문상세번호 */
 	oNo NUMBER(5), /* 주문번호 */
 	pNo NUMBER(5), /* 상품번호 */
 	quantity NUMBER(5), /* 주문수량 */
-	result_yn CHAR(1) /* 처리완료여부 */
+	result_yn CHAR(1) DEFAULT '1' /* 처리완료여부 */
 );
 
 

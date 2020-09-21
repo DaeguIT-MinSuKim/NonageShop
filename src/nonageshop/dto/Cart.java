@@ -3,15 +3,14 @@ package nonageshop.dto;
 import java.util.Date;
 
 public class Cart {
-	private int no; // 장바구니번호
-	private Member member; // 주문자 아이디
-	private Product product; // 상품번호
-	private int quantity; // 수량
-	private Date regDate; // 등록일
+	private int no;            // 장바구니번호
+	private Member member;     // 주문자 아이디
+	private Product product;   // 상품번호
+	private int quantity;      // 수량
+	private Date regDate;      // 등록일
 	private boolean isResult;
 
-	public Cart() {
-	}
+	public Cart() {}
 
 	public Cart(int no, Member member, Product product, int quantity, Date regDate) {
 		this.no = no;
