@@ -13,28 +13,7 @@ insert into product(name, kind, price, saleprice, margin, content, image) values
 insert into product(name, kind, price, saleprice, margin, content, image, best_yn) values('샌달', '3', '5000', '5500', '500', '사계절용 샌달입니다.', 'w-09.jpg','n');
 insert into product(name, kind, price, saleprice, margin, content, image, best_yn) values('스니커즈', '5', '15000', '20000', '5000', '활동성이 좋은 스니커즈입니다.', 'w-05.jpg','n');
 
--- VIEW
--- 신상품
-create or replace view new_pro_view
-as
-SELECT no, name, saleprice, image 
-FROM (select rownum, no, name, saleprice, image 
-      from product  
-      where del_yn='y' 
-      order by reg_date desc)
-where  rownum <=4;
 
-SELECT NO, NAME, SALEPRICE, IMAGE FROM NEW_PRO_VIEW;
-
--- 베스트 상품
-create or replace view best_pro_view
-as
-select no, name, saleprice, image 
-from( select rownum, no, name, saleprice, image 
-      from product  
-      where best_yn='y' 
-      order by reg_date desc)
-where  rownum <=4;
 
 SELECT NO, NAME, SALEPRICE, IMAGE FROM BEST_PRO_VIEW;
 
@@ -62,11 +41,6 @@ insert into member(id, pwd, name, zip_num, address, phone, email) values
 insert into cart(memberid, pno, quantity) values('one', 1, 1);
 select * from cart_view where MEMBERID='one' order by no DESC;
 
-create or replace view cart_view
-as
-SELECT c.NO , c.MEMBERID , c.PNO , m.NAME mname, p.NAME pname, c.QUANTITY, c.REG_DATE, p.SALEPRICE , c.RESULT 
-  FROM cart c JOIN MEMBER m ON c.MEMBERID = m.ID JOIN PRODUCT p ON c.PNO =p."NO" 
- WHERE result = '1';
 
 SELECT NO, MEMBERID, PNO, MNAME, PNAME, QUANTITY, REG_DATE, SALEPRICE, RESULT 
   FROM CART_VIEW WHERE MEMBERID='one' 
