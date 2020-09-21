@@ -1,20 +1,38 @@
-package nonageshop.service;
+package nonageshop.dao.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import nonageshop.dao.CartDao;
-import nonageshop.dao.OrderDao;
 import nonageshop.dao.impl.CartDaoImpl;
 import nonageshop.dao.impl.OrderDaoImpl;
-import nonageshop.ds.JndiDS;
+import nonageshop.ds.JdbcUtil;
+import nonageshop.dto.Member;
 import nonageshop.dto.OrderDetail;
 import nonageshop.dto.Orders;
 
 public class OrderService {
-    private OrderDao orderDao = OrderDaoImpl.getInstance();
-    private CartDao cartDao = CartDaoImpl.getInstance();
+    private OrderDaoImpl orderDao = OrderDaoImpl.getInstance();
+    private CartDaoImpl cartDao = CartDaoImpl.getInstance();
+    
+    public OrderService() {
+    	orderDao.setCon(JdbcUtil.getConnection());
+    	cartDao.setCon(JdbcUtil.getConnection());
+	}
+
+    public ArrayList<Integer> selectSeqOrderIng(Member member){
+    	return orderDao.selectSeqOrderIng(member);
+    }
+    
+    public Orders orderListByMember(String memberId, int orderNo, String result) {
+    	return orderDao.listOrderByMember(memberId, orderNo, result);
+    }
+    
+    public int maxOrderNo() {
+    	return orderDao.selectMaxOrdersNo();
+    }
+    
     
     public int addOrderAndDetail(Orders orders) {
         String ordersSql = "INSERT INTO ORDERS(ID) VALUES(?)";
@@ -23,8 +41,9 @@ public class OrderService {
         PreparedStatement orderPstmt = null;
         PreparedStatement detailPstmt = null;
         int ordersMaxNo = 0;
+        
         try {
-            con = JndiDS.getConnection();
+            con = JdbcUtil.getConnection();
             con.setAutoCommit(false);
             
             orderPstmt = con.prepareStatement(ordersSql);
@@ -32,8 +51,8 @@ public class OrderService {
             orderPstmt.executeUpdate();
             
             detailPstmt = con.prepareStatement(detailSql);
-            ordersMaxNo = orderDao.selectMaxOrdersNo();
-            
+            ordersMaxNo = maxOrderNo() + 1;
+            System.out.println("orderMaxNo" + ordersMaxNo);
             for(OrderDetail od : orders.getDetails()) {
                 detailPstmt.setInt(1, ordersMaxNo);
                 detailPstmt.setInt(2, od.getCart().getProduct().getNo());
@@ -49,8 +68,7 @@ public class OrderService {
         } finally {
             closeUtil(con, orderPstmt, detailPstmt);
         }
-		return ordersMaxNo;
-
+        return ordersMaxNo;
     }
 
     private void rollbackUtil(Connection con, SQLException e) {

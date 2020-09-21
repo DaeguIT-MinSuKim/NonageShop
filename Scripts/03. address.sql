@@ -1,20 +1,21 @@
-INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
-zip_code ) VALUES ( 
-'135-512', '서울', '강남구', '역삼2동 진달래아파트', '(10∼17동)', '446'); 
-INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
-zip_code ) VALUES ( 
-'135-918', '서울', '강남구', '역삼2동', '706∼707', '447'); 
-INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
-zip_code ) VALUES ( 
-'135-919', '서울', '강남구', '역삼2동', '708∼716', '448'); 
-INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
-zip_code ) VALUES ( 
+/* 주소 */
+CREATE TABLE address (
+	zip_num CHAR(7), /* 우편번호 */
+	sido VARCHAR(100), /* 시도 */
+	gugun VARCHAR(100), /* 구군 */
+	dong VARCHAR(100), /* 동 */
+	zip_code VARCHAR(100), /* 우편코드 */
+	bunji VARCHAR(100) /* 번지 */
+);
+
+INSERT INTO address ( zip_num, sido, gugun, dong, bunji,zip_code ) VALUES ( '135-512', '서울', '강남구', '역삼2동 진달래아파트', '(10∼17동)', '446'); 
+INSERT INTO address ( zip_num, sido, gugun, dong, bunji,zip_code ) VALUES ('135-918', '서울', '강남구', '역삼2동', '706∼707', '447'); 
+INSERT INTO address ( zip_num, sido, gugun, dong, bunji,zip_code ) VALUES ( '135-919', '서울', '강남구', '역삼2동', '708∼716', '448'); 
+INSERT INTO address ( zip_num, sido, gugun, dong, bunji,zip_code ) VALUES ( 
 '135-920', '서울', '강남구', '역삼2동', '717∼724', '449'); 
-INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
-zip_code ) VALUES ( 
+INSERT INTO address ( zip_num, sido, gugun, dong, bunji,zip_code ) VALUES ( 
 '135-921', '서울', '강남구', '역삼2동', '725∼730', '450'); 
-INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
-zip_code ) VALUES ( 
+INSERT INTO address ( zip_num, sido, gugun, dong, bunji,zip_code ) VALUES ( 
 '135-514', '서울', '강남구', '역삼2동', '731∼734', '451'); 
 INSERT INTO address ( zip_num, sido, gugun, dong, bunji,
 zip_code ) VALUES ( 

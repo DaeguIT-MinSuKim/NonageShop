@@ -26,12 +26,25 @@ SELECT * FROM ORDER_DETAIL;
 
 -- 
 SELECT * FROM cart;
-
+SELECT * FROM product;
+SELECT * FROM member;
 --
 
 SELECT * FROM ORDERs;
 SELECT * FROM ORDER_DETAIL;
 SELECT * FROM order_view;
+SELECT * FROM cart;
+SELECT DNO, ONO, MID, ORDER_DATE, PNO, QUANTITY, MNAME, ZIP_NUM, ADDRESS, PHONE, PNAME, SALEPRICE, RESULT
+  FROM ORDER_VIEW WHERE MID = 'two' AND ono=(SELECT max(no) FROM ORDERS) AND RESULT = '1';
+  
+SELECT max(no) FROM ORDERS;
+-- ORDER
+insert into orders(id) values('two'); -- ono4
 
-SELECT DNO, ONO, MID, ORDER_DATE, PNO, QUANTITY, MNAME, ZIP_NUM, ADDRESS, PHONE, PNAME, SALEPRICE, "RESULT"
-  FROM ORDER_VIEW WHERE MID='ONE' AND RESULT LIKE '%1%' AND ONO=1;
+insert into order_detail(ono, pno, quantity) values((SELECT max(no) FROM ORDERS), 9, 3);
+insert into order_detail(ono, pno, quantity) values((SELECT max(no) FROM ORDERS), 10, 3);
+insert into order_detail(ono, pno, quantity) values((SELECT max(no) FROM ORDERS), 11, 3);
+
+SELECT * FROM ORDER_VIEW where mid='two' and result='1' order by ono DESC;
+
+select distinct ono from order_view where mid='two' and result='1' order by ono DESC;

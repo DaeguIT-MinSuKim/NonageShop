@@ -37,7 +37,7 @@ public class OrderDaoImpl implements OrderDao {
                     + "WHERE MID=? AND RESULT LIKE ? AND ONO=?";
         try (PreparedStatement pstmt = con.prepareStatement(sql)){
             pstmt.setString(1, memberId);
-            pstmt.setString(2, result);
+            pstmt.setString(2, "%"+result+"%");
             pstmt.setInt(3, orderNo);
             try(ResultSet rs = pstmt.executeQuery()){
                 if (rs.next()) {
@@ -51,27 +51,13 @@ public class OrderDaoImpl implements OrderDao {
                     
                    ArrayList<OrderDetail> details = new ArrayList<OrderDetail>();
                     do {
-                        OrderDetail detail = new OrderDetail();
-                        detail.setNo(rs.getInt("DNO"));
-                        detail.setOrderDate(rs.getDate("ORDER_DATE"));
-                        detail.setResult(rs.getString("RESULT"));
-                        
-                        Product product = new Product(rs.getInt("PNO"), rs.getString("PNAME"));
-                        product.setSalePrice(rs.getInt("SALEPRICE"));
-                        
-                        Cart cart = new Cart();
-                        cart.setProduct(product);
-                        cart.setQuantity(rs.getInt("QUANTITY"));
-                        
-                        detail.setCart(cart);
-                      
-                        details.add(detail);
+                        details.add(getOrderDetail(rs));
                     }while(rs.next());
                     
                     orders.setDetails(details);
+                    orders.setOrderDate(details.get(0).getOrderDate());
                     return orders;
                 }
-                
             }
         } catch (SQLException e) {
             throw new CustomSQLException(e);
@@ -79,9 +65,42 @@ public class OrderDaoImpl implements OrderDao {
         return null;
     }
 
+	private OrderDetail getOrderDetail(ResultSet rs) throws SQLException {
+		OrderDetail detail = new OrderDetail();
+		detail.setNo(rs.getInt("DNO"));
+		detail.setOrderDate(rs.getDate("ORDER_DATE"));
+		detail.setResult(rs.getString("RESULT"));
+		
+		Product product = new Product(rs.getInt("PNO"), rs.getString("PNAME"));
+		product.setSalePrice(rs.getInt("SALEPRICE"));
+		
+		Cart cart = new Cart();
+		cart.setProduct(product);
+		cart.setQuantity(rs.getInt("QUANTITY"));
+		
+		detail.setCart(cart);
+		return detail;
+	}
+
     @Override
     public ArrayList<Integer> selectSeqOrderIng(Member member) {
-        // TODO Auto-generated method stub
+        String sql ="select distinct ono "
+        		  + "  from order_view "
+        		  + " where mid=? and result='1' order by ono DESC";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)){
+        	pstmt.setNString(1, member.getId());
+        	try(ResultSet rs = pstmt.executeQuery()){
+        		if (rs.next()) {
+        			ArrayList<Integer> orderNo=new ArrayList<Integer>();
+        			do {
+        				orderNo.add(rs.getInt(1));
+        			}while(rs.next());
+        			return orderNo;
+        		}
+        	}
+        } catch (SQLException e) {
+        	throw new CustomSQLException(e);
+		}
         return null;
     }
 

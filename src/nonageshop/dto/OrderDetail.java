@@ -12,7 +12,11 @@ public class OrderDetail {
         // TODO Auto-generated constructor stub
     }
 
-    public int getNo() {
+    public OrderDetail(Cart cart) {
+		this.cart = cart;
+	}
+
+	public int getNo() {
         return no;
     }
 

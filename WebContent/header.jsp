@@ -48,7 +48,7 @@
          <a href="cartList.do">CART</a>
        </li><li>/</li>
        <li>
-         <a href="NonageServlet?command=mypage">MY PAGE</a>
+         <a href="mypage.do">MY PAGE</a>
        </li><li>/</li>
        <li>
          <a href="NonageServlet?command=qna_list">Q&amp;A(1:1)</a>

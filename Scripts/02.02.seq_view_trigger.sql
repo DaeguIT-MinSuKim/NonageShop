@@ -45,7 +45,17 @@ select d.NO dno, o.NO ono, o.id mid, o.ORDER_DATE , d.PNO pno, d.quantity, m.nam
        JOIN product p ON d.PNO = p.NO;
 
 /*****************************************
-시퀀스 생성 
+시퀀스 삭제
+******************************************/
+DROP SEQUENCE PRODUCT_NO_SEQ; 
+DROP SEQUENCE CART_NO_SEQ;
+DROP SEQUENCE ORDERS_NO_SEQ;
+DROP SEQUENCE ORDER_DETAIL_NO_SEQ;
+DROP SEQUENCE QNA_NO_SEQ;
+  
+  
+/*****************************************
+시퀀스 생성
 ******************************************/
 
 -- product(no), 

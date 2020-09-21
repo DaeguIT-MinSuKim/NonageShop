@@ -1,9 +1,15 @@
 -- 접속자 확인
 SELECT USER FROM DUAL;
 
-/* 상품
- * no 시퀀스 생성
- *  */
+DROP TABLE cart;
+DROP TABLE order_detail;
+DROP TABLE orders;
+DROP  TABLE qna;
+DROP TABLE worker;
+DROP TABLE product;
+DROP TABLE MEMBER;
+
+/* 상품  */
 CREATE TABLE product (
 	no NUMBER(5) NOT NULL PRIMARY KEY, /* 상품번호 */
 	name VARCHAR(100), /* 상품이름 */
@@ -31,9 +37,7 @@ CREATE TABLE member (
 	join_date DATE DEFAULT sysdate/* 가입일 */
 );
 
-/* 장바구니 
- * no sequence */
-DROP TABLE cart;
+/* 장바구니  */
 CREATE TABLE cart (
 	no NUMBER(5) NOT NULL, /* 장바구니번호 */
 	pno NUMBER(5), /* 상품번호 */
@@ -43,19 +47,14 @@ CREATE TABLE cart (
 	reg_date DATE DEFAULT sysdate/* 등록일 */
 );
 
-
 /* 주문 */
-DROP TABLE orders;
 CREATE TABLE orders (
 	no NUMBER(5) NOT NULL PRIMARY KEY , /* 주문번호 */
 	id VARCHAR2(20), /* 주문아이디 */
 	order_date DATE DEFAULT sysdate /* 주문일 */
 );
 
-
-/* 주문상세 
- * no sequence */
-DROP TABLE order_detail;
+/* 주문상세 */
 CREATE TABLE order_detail (
 	no NUMBER(5) NOT NULL PRIMARY KEY , /* 주문상세번호 */
 	oNo NUMBER(5), /* 주문번호 */
@@ -65,84 +64,30 @@ CREATE TABLE order_detail (
 );
 
 
-/* QNA 게시판
- * no sequence */
+/* QNA 게시판 */
 CREATE TABLE qna (
 	no NUMBER(5) NOT NULL PRIMARY KEY , /* 번호 */
-	subject VARCHAR(100), /* 제목 */
-	content VARCHAR2(1000), /* 내용 */
-	rep VARCHAR2(1000), /* 답변 */
-	id VARCHAR2(20), /* 작성자아이디 */
-	rep_yn CHAR(1) DEFAULT '1', /* 답변여부 */
-	write_date DATE DEFAULT sysdate /* 작성일 */
-);
-
-/* 주소 */
-CREATE TABLE address (
-	zip_num CHAR(7), /* 우편번호 */
-	sido VARCHAR(100), /* 시도 */
-	gugun VARCHAR(100), /* 구군 */
-	dong VARCHAR(100), /* 동 */
-	zip_code VARCHAR(100), /* 우편코드 */
-	bunji VARCHAR(100) /* 번지 */
+	subject VARCHAR(100), 				/* 제목 */
+	content VARCHAR2(1000), 			/* 내용 */
+	rep VARCHAR2(1000), 				/* 답변 */
+	id VARCHAR2(20), 					/* 작성자아이디 */
+	rep_yn CHAR(1) DEFAULT '1',			/* 답변여부 */
+	write_date DATE DEFAULT sysdate 	/* 작성일 */
 );
 
 /* 관리자 */
 CREATE TABLE worker (
-	id VARCHAR2(20) NOT NULL PRIMARY KEY, /* 아이디 */
-	pwd VARCHAR(20), /* 암호 */
-	name VARCHAR(100), /* 이름 */
-	phone CHAR(13) /* 전화번호 */
+	id VARCHAR2(20) NOT NULL PRIMARY KEY, 	/* 아이디 */
+	pwd VARCHAR(20), 						/* 암호 */
+	name VARCHAR(100), 						/* 이름 */
+	phone CHAR(13) 							/* 전화번호 */
 );
 
 --------------------------------------------
+ALTER TABLE cart ADD CONSTRAINT FK_product_TO_cart FOREIGN KEY (pno) REFERENCES product (no);
+ALTER TABLE cart ADD CONSTRAINT FK_member_TO_cart  FOREIGN KEY (memberId) REFERENCES member (id);
 
-ALTER TABLE cart
-	ADD
-		CONSTRAINT FK_product_TO_cart
-		FOREIGN KEY (
-			pno
-		)
-		REFERENCES product (
-			no
-		);
+ALTER TABLE orders ADD CONSTRAINT FK_member_TO_orders	FOREIGN KEY (id)REFERENCES member (id);
 
-ALTER TABLE cart
-	ADD
-		CONSTRAINT FK_member_TO_cart
-		FOREIGN KEY (
-			memberId
-		)
-		REFERENCES member (
-			id
-		);
-
-ALTER TABLE orders
-	ADD
-		CONSTRAINT FK_member_TO_orders
-		FOREIGN KEY (
-			id
-		)
-		REFERENCES member (
-			id
-		);
-
-ALTER TABLE order_detail
-	ADD
-		CONSTRAINT FK_orders_TO_order_detail
-		FOREIGN KEY (
-			oNo
-		)
-		REFERENCES orders (
-			no
-		);
-
-ALTER TABLE order_detail
-	ADD
-		CONSTRAINT FK_product_TO_order_detail
-		FOREIGN KEY (
-			pNo
-		)
-		REFERENCES product (
-			no
-		);
+ALTER TABLE order_detail ADD CONSTRAINT FK_orders_TO_order_detail FOREIGN KEY (oNo)REFERENCES orders (	no);
+ALTER TABLE order_detail ADD CONSTRAINT FK_product_TO_order_detail FOREIGN KEY (pNo)REFERENCES product (no);
