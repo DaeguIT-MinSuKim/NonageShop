@@ -34,4 +34,24 @@ public class ProductService {
     public ArrayList<Product> kindProducts(String kind) {
         return dao.listKindProduct(kind);
     }
+    
+    //관리자용 - 상품관리 페이징
+    public int totalRecord(String productName) {
+    	return dao.totalRecord(productName);
+    }
+    public String pageNumber(int tpage, String name){
+    	return dao.pageNumber(tpage, name);
+    }
+    public ArrayList<Product> listProduct(int tpage, String product_name){
+    	return dao.listProduct(tpage, product_name);
+    }
+    
+    //관리자용 - 상품 등록 및 수정
+    public int insertProduct(Product product){
+    	return dao.insertProduct(product);
+    }
+    
+    public int updateProduct(Product product){
+    	return dao.updateProduct(product);
+    }
 }

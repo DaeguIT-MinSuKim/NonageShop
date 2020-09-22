@@ -5,7 +5,7 @@
 
 <article>
 <h1>상품리스트</h1>	
-<form name="frm" method="post">
+<form id="frm" method="post">
 <table>
   <tr>
   <td width="642">
@@ -13,7 +13,7 @@
      <input type="text" name="key">
      <input class="btn" type="button" name="btn_search" value="검색" onClick="go_search()">
      <input class="btn" type="button" name="btn_total" value="전체보기 " onClick="go_total()">
-     <input class="btn" type="button" name="btn_write" value="상품등록" onClick="go_wrt()">
+     <input class="btn" type="button" id="btn_write" value="상품등록" >
   </td>
   </tr>
 </table>
@@ -24,26 +24,22 @@
     <c:choose>
     <c:when test="${productListSize<=0}">
     <tr>
-      <td width="100%" colspan="7" align="center" height="23">
-        등록된 상품이 없습니다.
-      </td>      
+      <td width="100%" colspan="7" align="center" height="23">등록된 상품이 없습니다.</td>      
     </tr>
     </c:when>
 	<c:otherwise>
-	<c:forEach items="${productList}" var="productVO">
+	<c:forEach items="${productList}" var="product">
     <tr>
-      <td height="23" align="center" >${productVO.pseq}</td>
+      <td height="23" align="center" >${product.no}</td>
       <td style="text-align: left; padding-left: 50px; padding-right: 0px;">   
-        <a href="#" onClick="go_detail('${tpage}', '${productVO.pseq}')">
-    	 ${productVO.name}     
-   		</a>
+        <a href="#" onClick="go_detail('${tpage}', '${product.no}')">${product.name} </a>
    	  </td>
-      <td><fmt:formatNumber value="${productVO.price1}"/></td>
-      <td><fmt:formatNumber value="${productVO.price2}"/></td>
-      <td><fmt:formatDate value="${productVO.indate}"/></td>
+      <td><fmt:formatNumber value="${product.price}"/></td>
+      <td><fmt:formatNumber value="${product.salePrice}"/></td>
+      <td><fmt:formatDate value="${product.regDate}"/></td>
       <td>
       	<c:choose>
-   	 		<c:when test='${productVO.useyn=="1"}'>미사용</c:when>
+   	 		<c:when test='${product.delYn=="1"}'>미사용</c:when>
    	 		<c:otherwise>사용</c:otherwise>   	 		
    	 	</c:choose>	 
    	  </td> 

@@ -7,14 +7,14 @@
 <h1>상품등록</h1>  
 <!-- [1] 파일을 업로드 하기 위해서는 폼태그를 post 방식으로 전송하고,
 인코딩 타입을 multipart/form-data 로 지정해야 한다. -->
-<form name="frm" method="post" enctype="multipart/form-data">
+<form id="frm" name="frm" method="post" enctype="multipart/form-data">
 <table id="list">
 <tr>
   <th>상품분류</th>
   <td colspan="5">
   <select name="kind">
     <c:forEach items="${kindList}" var="kind" varStatus="status">
-      <option value="${status.count}">${kind}</option>
+      <option value="${kine.no}">${kind.name}</option>
    </c:forEach>
   </select>      
 <tr>
@@ -26,15 +26,15 @@
 <tr>
   <th>원가[A]</th>
   <td width="70">
-    <input type="text" name="price1" size="11" onKeyUp='NumFormat(this)' value="10000">
+    <input type="text" id="price" name="price"  size="11" value="10000">
   </td>
   <th>판매가[B]</th>
   <td width="70">
-     <input type="text" name="price2" size="11" onBlur="go_ab()" onKeyUp='NumFormat(this)' value="20000">
+     <input type="text" id="salePrice" name="salePrice" size="11" value="20000">
   </td>
   <th>[B-A]</th>
     <td width="72">
-      <input type="text" name="price3" size="11" readonly onKeyUp='NumFormat(this)'>
+      <input type="text" id="margin" name="margin" size="11" readonly >
     </td>
   </tr>
     
@@ -52,8 +52,8 @@
     </td>
   </tr>    
 </table>
-<input class="btn" type="button" value="등록" onClick="go_save()">           
-<input class="btn" type="button" value="취소" onClick="go_mov()">
+<input class="btn" type="button" value="등록" id="reg" >           
+<input class="btn" type="button" value="취소" id="cancel">
 </form> 
 </article>
 <%@ include file="/admin/footer.jsp"%>
