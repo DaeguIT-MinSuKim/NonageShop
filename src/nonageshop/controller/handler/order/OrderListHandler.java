@@ -1,7 +1,6 @@
-package nonageshop.controller.handler;
+package nonageshop.controller.handler.order;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,34 +8,34 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nonageshop.controller.Command;
-import nonageshop.dto.Cart;
+import nonageshop.dao.service.OrderService;
 import nonageshop.dto.Member;
-import nonageshop.service.CartService;
+import nonageshop.dto.OrderDetail;
+import nonageshop.dto.Orders;
 
-public class CartListHandler implements Command {
-	private CartService service = new CartService();
-	private String url;
-
+public class OrderListHandler implements Command {
+	private OrderService service = new OrderService();
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String url = "mypage/orderList.jsp";
+		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
+
 		if (loginUser == null) {
 			url = "loginform.do";
 		} else {
-			ArrayList<Cart> cartList = service.listCartByMember(loginUser);
+			int no = Integer.parseInt(request.getParameter("no"));
+			Orders orders = service.orderListByMember(loginUser.getId(), no, "1");
+			System.out.println("orders > " + orders);
 			int totalPrice = 0;
-			if (cartList != null) {
-				for (Cart cart : cartList) {
-					totalPrice += cart.getProduct().getSalePrice() * cart.getQuantity();
-				}
-			}else {
-				cartList = new ArrayList<Cart>();
+			for (OrderDetail detail : orders.getDetails()) {
+				totalPrice += detail.getCart().getProduct().getSalePrice() * detail.getCart().getQuantity();
 			}
-			request.setAttribute("cartList", cartList);
+			request.setAttribute("orders", orders);
 			request.setAttribute("totalPrice", totalPrice);
-			url = "mypage/cartList.jsp";
 		}
 		return url;
 	}

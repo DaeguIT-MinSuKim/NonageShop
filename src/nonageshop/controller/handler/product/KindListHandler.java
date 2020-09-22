@@ -1,4 +1,4 @@
-package nonageshop.controller.handler;
+package nonageshop.controller.handler.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;

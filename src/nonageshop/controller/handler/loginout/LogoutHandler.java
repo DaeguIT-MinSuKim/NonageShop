@@ -1,4 +1,4 @@
-package nonageshop.controller.handler;
+package nonageshop.controller.handler.loginout;
 
 import java.io.IOException;
 
@@ -8,23 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nonageshop.controller.Command;
-import nonageshop.dto.Member;
 
-public class QnAWriteFormHandler implements Command {
+public class LogoutHandler implements Command {
 
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "qna/qnaWrite.jsp";
-        
-        HttpSession session = request.getSession();
-        Member loginUser = (Member) session.getAttribute("loginUser"); 
-        
-        if (loginUser == null) {
-        url = "loginform.do";
+        HttpSession session=request.getSession(false);
+        if(session!=null){
+            session.invalidate();
         } 
-
-        return url;
+        return "index.do";
     }
 
 }

@@ -1,7 +1,6 @@
-package nonageshop.controller.handler;
+package nonageshop.controller.handler.qna;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +12,13 @@ import nonageshop.dto.Member;
 import nonageshop.dto.QnA;
 import nonageshop.service.QnAService;
 
-public class QnAListHandler implements Command {
+public class QnAWriteHandler implements Command {
     private QnAService service = new QnAService();
-    
+
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "qna/qnaList.jsp";
+        String url = "qnaList.do";
 
         HttpSession session = request.getSession();
         Member loginUser = (Member) session.getAttribute("loginUser");
@@ -27,10 +26,14 @@ public class QnAListHandler implements Command {
         if (loginUser == null) {
             url = "loginform.do";
         } else {
-            ArrayList<QnA> qnaList = service.listQna(loginUser.getId());
-            request.setAttribute("qnaList", qnaList);
+            QnA qnaVO = new QnA();
+            qnaVO.setSubject(request.getParameter("subject"));
+            qnaVO.setContent(request.getParameter("content"));
+            qnaVO.setId(loginUser.getId());
+            service.insertqna(qnaVO);
         }
-        return url;
+        response.sendRedirect(url);
+        return null;
     }
 
 }

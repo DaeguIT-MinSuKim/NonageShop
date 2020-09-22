@@ -1,4 +1,4 @@
-package nonageshop.controller.handler;
+package nonageshop.controller.handler.loginout;
 
 import java.io.IOException;
 
