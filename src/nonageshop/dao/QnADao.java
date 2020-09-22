@@ -7,5 +7,5 @@ import nonageshop.dto.QnA;
 public interface QnADao {
     ArrayList<QnA> listQna(String id);  
     QnA getQnA(int no);                
-    int insertqna(QnA qna, String session_id);
+    int insertqna(QnA qna);
 }

@@ -73,12 +73,12 @@ public class QnADaoImpl implements QnADao {
     }
 
     @Override
-    public int insertqna(QnA qna, String session_id) {
+    public int insertqna(QnA qna) {
         String sql = "INSERT INTO QNA (SUBJECT, CONTENT, ID) VALUES(?, ?, ?)";
         try (PreparedStatement pstmt = con.prepareStatement(sql)) {
             pstmt.setString(1, qna.getSubject());
             pstmt.setString(2, qna.getContent());
-            pstmt.setString(3, session_id);
+            pstmt.setString(3, qna.getId());
             return pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new CustomSQLException(e);

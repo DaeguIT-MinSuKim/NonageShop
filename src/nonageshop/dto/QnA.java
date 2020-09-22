@@ -15,6 +15,12 @@ public class QnA {
         // TODO Auto-generated constructor stub
     }
 
+    public QnA(String subject, String content, String id) {
+        this.subject = subject;
+        this.content = content;
+        this.id = id;
+    }
+
     public QnA(int no, String subject, String content, String rep, String id, String repYN, Date writeDate) {
         this.no = no;
         this.subject = subject;
