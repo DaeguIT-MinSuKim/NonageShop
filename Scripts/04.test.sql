@@ -47,4 +47,10 @@ insert into order_detail(ono, pno, quantity) values((SELECT max(no) FROM ORDERS)
 
 SELECT * FROM ORDER_VIEW where mid='two' and result='1' order by ono DESC;
 
-select distinct ono from order_view where mid='two' and result='1' order by ono DESC;
+select distinct ono from order_view 
+where mid='two' and result='1' order by ono DESC;
+
+SELECT ONO, MID, MNAME, PHONE, ZIP_NUM, ADDRESS, DNO, ORDER_DATE, RESULT,
+       PNO, PNAME, QUANTITY, SALEPRICE 
+  FROM ORDER_VIEW 
+ WHERE MID='two' AND RESULT LIKE '%' ;

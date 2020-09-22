@@ -12,9 +12,9 @@
         <th>주문일자</th> <th>주문번호</th> <th>주문자</th><th>주문 총액</th>     
      </tr>     
      <tr>  
-       <td> <fmt:formatDate value="${orderDetail.indate}" type="date"/></td>
-       <td> ${orderDetail.oseq} </td>    
-       <td> ${orderDetail.mname} </td>
+       <td> <fmt:formatDate value="${orderDetail.orderDate}" type="date"/></td>
+       <td> ${orderDetail.no} </td>    
+       <td> ${orders.member.name} </td>
        <td> <fmt:formatNumber type="currency" value="${totalPrice}" /> </td>
      </tr>    
      </table>         
@@ -23,15 +23,15 @@
      <tr>
        <th>상품명</th> <th>상품별주문번호</th> <th>수량</th> <th>가격</th> <th>처리 상태</th>    
      </tr>
-     <c:forEach items="${orderList}"  var="orderVO">
+     <c:forEach items="${orders.details}"  var="orderDetail">
      <tr>
-       <td> ${orderVO.pname} </td>
-       <td> ${orderVO.odseq} </td>          
-       <td> ${orderVO.quantity} </td>
-       <td> <fmt:formatNumber type="currency" value="${orderVO.price2*orderVO.quantity}" /> </td>
+       <td> ${orderDetail.cart.product.name} </td>
+       <td> ${orderDetail.no} </td>          
+       <td> ${orderDetail.cart.quantity} </td>
+       <td> <fmt:formatNumber type="currency" value="${orderDetail.cart.product.salePrice * orderDetail.cart.quantity}" /> </td>
        <td>
          <c:choose>
-         	<c:when test='${orderVO.result=="1"}'> 진행중 </c:when>
+         	<c:when test='${orderDetail.result=="1"}'> 진행중 </c:when>
          	<c:otherwise> <span style="color:red"> 처리완료 </span></c:otherwise>
          </c:choose>
        </td>
