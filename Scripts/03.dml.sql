@@ -34,3 +34,9 @@ insert into order_detail(ono, pno, quantity) values(3, 3, 1);
 insert into order_detail(ono, pno, quantity) values(3, 2, 1);
 insert into order_detail(ono, pno, quantity) values(3, 6, 2);
 insert into order_detail(ono, pno, quantity) values(3, 1, 2);
+
+--QnA
+insert into qna (subject, content, id) values('테스트', '질문내용1', 'one');
+update qna SET rep='답변내용', rep_yn='2';
+
+insert into qna (subject, content, id)values('테스트2', '질문내용2', 'one');
