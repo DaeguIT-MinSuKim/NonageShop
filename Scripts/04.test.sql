@@ -63,3 +63,23 @@ update qna SET rep='답변내용', rep_yn='2';
 SELECT NO, SUBJECT, CONTENT, REP, ID, REP_YN, WRITE_DATE FROM QNA WHERE ID='one' ORDER BY NO DESC;
 SELECT NO, SUBJECT, CONTENT, REP, ID, REP_YN, WRITE_DATE FROM QNA WHERE NO=2;
 INSERT INTO QNA (SUBJECT, CONTENT, ID) VALUES(?, ?, ?);
+
+-- worker
+SELECT * FROM worker;
+
+SELECT 1 FROM worker WHERE id='admin' AND pwd='admin';
+SELECT 1 FROM worker WHERE id='admin' AND pwd='1111';
+SELECT 1 FROM worker WHERE id='aaaa' AND pwd='admin';
+ 
+-- admin product
+select * from product;
+select count(*) from product;
+select count(*) from product where name like '%%%';
+
+
+SELECT NO, REG_DATE, NAME, PRICE, SALEPRICE , DEL_YN, BEST_YN 
+  FROM PRODUCT 
+ WHERE NAME LIKE '%%' ORDER BY NO DESC;
+ 
+INSERT INTO PRODUCT(NAME, KIND, PRICE, SALEPRICE, MARGIN, CONTENT, IMAGE) VALUES(?,?,?,?,?,?,?);
+UPDATE PRODUCT SET KIND=?, DEL_YN=?, NAME=?, PRICE=?, SALEPRICE=?, MARGIN =?, CONTENT=?, IMAGE=?, BEST_YN=? WHERE NO=?

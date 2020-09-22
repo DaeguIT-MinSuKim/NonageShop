@@ -13,4 +13,13 @@ public interface ProductDao {
     Product getProduct(int no);
     // 상품종류별 상품 리스트 얻어오기
     ArrayList<Product> listKindProduct(String kind);
+    
+    //관리자용 - 상품관리 페이징
+    int totalRecord(String productName);
+    public String pageNumber(int tpage, String name);
+    ArrayList<Product> listProduct(int tpage, String product_name);
+    
+    //관리자용 - 상품 등록 및 수정
+    int insertProduct(Product product);
+    int updateProduct(Product product);
 }
