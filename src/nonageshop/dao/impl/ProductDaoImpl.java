@@ -42,14 +42,6 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
-    private Product getNewBestProduct(ResultSet rs) throws SQLException {
-        int no = rs.getInt("NO");
-        String name = rs.getString("NAME");
-        int salePrice = rs.getInt("SALEPRICE");
-        String image = rs.getString("IMAGE");
-        return new Product(no, name, salePrice, image);
-    }
-
     @Override
     public ArrayList<Product> listBestProduct() {
         String sql = "SELECT NO, NAME, SALEPRICE, IMAGE FROM BEST_PRO_VIEW";
@@ -82,18 +74,6 @@ public class ProductDaoImpl implements ProductDao {
             throw new CustomSQLException(e);
         }
         return null;
-    }
-
-    private Product getProduct(ResultSet rs) throws SQLException {
-        Product pdt = getNewBestProduct(rs);// NO, NAME, SALEPRICE, IMAGE
-        pdt.setKind(rs.getString("KIND"));
-        pdt.setPrice(rs.getInt("PRICE"));
-        pdt.setMargin(rs.getInt("MARGIN"));
-        pdt.setContent(rs.getString("CONTENT"));
-        pdt.setDelYn(rs.getString("DEL_YN"));
-        pdt.setBestYn(rs.getString("BEST_YN"));
-        pdt.setRegDate(rs.getDate("REG_DATE"));
-        return pdt;
     }
 
     @Override
@@ -198,7 +178,35 @@ public class ProductDaoImpl implements ProductDao {
         
         return str;
     }
-
+    private Product getNewBestProduct(ResultSet rs) throws SQLException {
+        int no = rs.getInt("NO");
+        String name = rs.getString("NAME");
+        Product product = new Product(no, name);
+        int salePrice = rs.getInt("SALEPRICE");
+        product.setSalePrice(salePrice);
+        
+        try {
+        	String image = rs.getString("IMAGE");
+        	product.setImage(image);
+        }catch(SQLException e) {}
+        
+        return product;
+    }
+    
+    private Product getProduct(ResultSet rs) throws SQLException {
+        Product pdt = getNewBestProduct(rs);// NO, NAME, SALEPRICE, IMAGE
+        pdt.setPrice(rs.getInt("PRICE"));
+        pdt.setDelYn(rs.getString("DEL_YN"));
+        pdt.setBestYn(rs.getString("BEST_YN"));
+        pdt.setRegDate(rs.getDate("REG_DATE"));
+        
+        try {pdt.setContent(rs.getString("CONTENT"));}catch(SQLException e) {}
+        try {pdt.setKind(rs.getString("KIND"));      }catch(SQLException e) {}
+        try {pdt.setMargin(rs.getInt("MARGIN"));     }catch(SQLException e) {}
+        
+        return pdt;
+    }
+    
     @Override
     public ArrayList<Product> listProduct(int tpage, String product_name) {
         String sql = "SELECT NO, REG_DATE, NAME, PRICE, SALEPRICE , DEL_YN, BEST_YN "
@@ -211,20 +219,18 @@ public class ProductDaoImpl implements ProductDao {
 
         try (PreparedStatement pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_UPDATABLE)) {
-            if (product_name.equals("")){
-                pstmt.setString(1, "%%");
-            } else{
                 pstmt.setString(1, "%"+product_name+"%");
-            }
             try (ResultSet rs = pstmt.executeQuery()) {
-                rs.absolute(absolutepage);
-                int count = 0;
-
+                
                 if (rs.next()) {
-                    do {
+                	rs.absolute(absolutepage);
+                    int count = 0;
+                    while(count < COUNTS) {
                         productList.add(getProduct(rs));
+                        if (rs.isLast()) break;
+                        rs.next();
                         count++;
-                    }while(count < COUNTS || rs.next());
+                    }
                 }
             }
         } catch (SQLException e) {

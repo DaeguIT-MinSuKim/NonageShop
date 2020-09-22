@@ -30,7 +30,17 @@ public class Product {
         this.image = image;
     }
 
-    public Product(int no, String name, String kind, int price, int salePrice, int margin, String content, String image,
+    public Product(String name, String kind, int price, int salePrice, int margin, String content, String image) {
+		this.name = name;
+		this.kind = kind;
+		this.price = price;
+		this.salePrice = salePrice;
+		this.margin = margin;
+		this.content = content;
+		this.image = image;
+	}
+
+	public Product(int no, String name, String kind, int price, int salePrice, int margin, String content, String image,
             String delYn, String bestYn, Date regDate) {
         this.no = no;
         this.name = name;
