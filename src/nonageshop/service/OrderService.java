@@ -3,6 +3,7 @@ package nonageshop.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import nonageshop.dao.CartDao;
 import nonageshop.dao.OrderDao;
@@ -15,6 +16,14 @@ import nonageshop.dto.Orders;
 public class OrderService {
     private OrderDao orderDao = OrderDaoImpl.getInstance();
     private CartDao cartDao = CartDaoImpl.getInstance();
+    
+    public ArrayList<Orders> listOrders(String memberName){
+        return orderDao.listOrders(memberName);
+    }
+    
+    public int updateOrderResult(int orderNo) {
+        return updateOrderResult(orderNo);
+    }
     
     public int addOrderAndDetail(Orders orders) {
         String ordersSql = "INSERT INTO ORDERS(ID) VALUES(?)";

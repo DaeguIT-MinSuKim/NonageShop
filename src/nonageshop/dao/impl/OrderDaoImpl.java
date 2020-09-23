@@ -65,23 +65,6 @@ public class OrderDaoImpl implements OrderDao {
         return null;
     }
 
-	private OrderDetail getOrderDetail(ResultSet rs) throws SQLException {
-		OrderDetail detail = new OrderDetail();
-		detail.setNo(rs.getInt("DNO"));
-		detail.setOrderDate(rs.getDate("ORDER_DATE"));
-		detail.setResult(rs.getString("RESULT"));
-		
-		Product product = new Product(rs.getInt("PNO"), rs.getString("PNAME"));
-		product.setSalePrice(rs.getInt("SALEPRICE"));
-		
-		Cart cart = new Cart();
-		cart.setProduct(product);
-		cart.setQuantity(rs.getInt("QUANTITY"));
-		
-		detail.setCart(cart);
-		return detail;
-	}
-
     @Override
     public ArrayList<Integer> selectSeqOrderIng(Member member) {
         String sql ="select distinct ono "
@@ -114,6 +97,69 @@ public class OrderDaoImpl implements OrderDao {
             throw new CustomSQLException(e);
         }
         return 0;
+    }
+
+    private OrderDetail getOrderDetail(ResultSet rs) throws SQLException {
+        OrderDetail detail = new OrderDetail();
+        detail.setNo(rs.getInt("DNO"));
+        detail.setOrderDate(rs.getDate("ORDER_DATE"));
+        detail.setResult(rs.getString("RESULT"));
+        Product product = new Product(rs.getInt("PNO"), rs.getString("PNAME"));
+        product.setSalePrice(rs.getInt("SALEPRICE"));
+        
+        Cart cart = new Cart();
+        cart.setProduct(product);
+        cart.setQuantity(rs.getInt("QUANTITY"));
+        
+        detail.setCart(cart);
+        return detail;
+    }
+
+    @Override
+    public ArrayList<Orders> listOrders(String memberName) {
+        String sql = "SELECT DNO, ONO, MID, ORDER_DATE, PNO, QUANTITY, MNAME, ZIP_NUM, ADDRESS, PHONE, PNAME, SALEPRICE, RESULT"
+               +     "  FROM ORDER_VIEW" 
+               +     " WHERE MNAME like ?"  
+               +     " ORDER BY RESULT, ONO DESC";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)){
+            pstmt.setString(1, "%" + memberName + "%");
+            try(ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()) {
+                    ArrayList<Orders> ordersList = new ArrayList<Orders>();
+                    do {
+                        Orders orders = new Orders();
+                        orders.setNo(rs.getInt("ONO"));
+                        
+                        Member member = new Member(rs.getString("MID"), rs.getString("MNAME"));
+                        member.setPhone(rs.getString("PHONE"));
+                        member.setZipNum(rs.getString("ZIP_NUM"));
+                        member.setAddress(rs.getString("ADDRESS"));
+                        orders.setMember(member);
+                        
+                        OrderDetail detail = getOrderDetail(rs);
+                        orders.setDetail(detail);
+                        orders.setOrderDate(detail.getOrderDate());
+                        ordersList.add(orders);
+                        
+                    }while(rs.next());
+                    return ordersList;
+                }
+            }
+        } catch (SQLException e) {
+            throw new CustomSQLException(e);
+        }
+        return null;
+    }
+
+    @Override
+    public int updateOrderResult(int orderNo) {
+        String sql = "UPDATE ORDER_DETAIL SET RESULT_YN = '2' WHERE ONO = ?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setInt(1, orderNo);
+            return pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new CustomSQLException(e);
+        }
     }
 
 }

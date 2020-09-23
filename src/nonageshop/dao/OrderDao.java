@@ -17,4 +17,7 @@ public interface OrderDao {
     Orders listOrderByMember(String memberId, int orderNo, String result);
     
     ArrayList<Integer> selectSeqOrderIng(Member member);
+    
+    ArrayList<Orders> listOrders(String memberName);
+    int updateOrderResult(int orderNo);
 }

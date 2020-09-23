@@ -8,7 +8,8 @@ public class Orders {
     private Member member; // 주문자정보(id, mname, zipNum, address, phone)
     private Date orderDate; // 주문일
     private ArrayList<OrderDetail> details;
-
+    private OrderDetail detail;
+    
     public int getNo() {
         return no;
     }
@@ -41,9 +42,18 @@ public class Orders {
         this.details = details;
     }
 
+    
+    public OrderDetail getDetail() {
+        return detail;
+    }
+
+    public void setDetail(OrderDetail detail) {
+        this.detail = detail;
+    }
+
     @Override
     public String toString() {
-        return String.format("Orders [no=%s, member=%s, orderDate=%s, details=%s]", no, member, orderDate, details);
+        return String.format("Orders [no=%s, member=%s, orderDate=%s, details=%s, detail=%s]", no, member, orderDate, details, detail);
     }
 
 }
