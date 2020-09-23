@@ -18,7 +18,7 @@
 	</c:when>
 </c:choose>
 </head>
-<body onload="go_ab()">
+<body >
 	<div id="wrap">
 		<header>			
 			<div id="logo">

@@ -41,7 +41,6 @@ update qna SET rep='답변내용', rep_yn='2';
 
 insert into qna (subject, content, id)values('테스트2', '질문내용2', 'one');
 
-
 -- worker
 insert into worker values('admin', 'admin', '홍관리', '010-777-7777');
 insert into worker values('pinksung', 'pinksung', '명강사', '010-999-9696');

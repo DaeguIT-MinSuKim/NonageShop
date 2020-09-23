@@ -12,14 +12,9 @@ function go_total() {
 	theForm.submit();
 }
 
-function go_detail(tpage, pseq) {
-	var theForm = document.frm;
-	// 상품 상세 보기 페이지에서 다시 상품 리스트로 돌아왔을 경우 현재 페이지로
-	// 돌아올 수 있도록 하기 위해서 현재 페이지 번호를 쿼리 스트링으로 넘겨준다.
-	theForm.action =  "NonageServlet?command=admin_product_detail&tpage=" +
-	                  tpage+"&pseq="+pseq;
-	
-	theForm.submit();
+function go_detail(tpage, pno) {
+	$("#frm").attr("action", "adminProductDetail.do?tpage=" + tpage+"&pno="+pno);
+	$('#frm').submit();
 }
 
 $(function(){
@@ -37,14 +32,13 @@ $(function(){
 		$('#margin').val(ab);
 	});
 	
+
 	$('#cancel').on("click",function(){
 		$("#frm").attr("action", "adminProductList.do");
 		$('#frm').submit();
 	});
 	
-	$('#reg').on("click",function(){
-		go_save();
-	});
+	$('#reg').on("click",fn_save);
 });
 
 fn_go_wrt=function go_wrt() {
@@ -52,45 +46,33 @@ fn_go_wrt=function go_wrt() {
 	$('#frm').submit();
 }
 
-function removeComma(input) // ,을 빼고 값을 다시 넣어준다.
-{
-	return input.value.replace(/,/gi, "");
-}
-
-function go_save() 
-{
-	var theForm = document.frm;
-	
-	if (theForm.kind.value == '') {
+fn_save=function go_save() {
+	if ($('#kind option:selected').val().length == 0) {
 		alert('상품분류를 선택하세요.');
-		theForm.kind.focus();
-	} else if (theForm.name.value == '') {
+		$('#kind').focus();
+	} else if ($('#name').val().length == 0) {
 		alert('상품명을 입력하세요.');
-		theForm.name.focus();
-	} else if (theForm.price1.value == '') {
+		$('#name').focus();
+	} else if ($('#price').val().length == 0) {
 		alert('원가를 입력하세요.');
-		theForm.price1.focus();
-	} else if (theForm.price2.value == '') {
+		$('#price').focus();
+	} else if ($('#salePrice').val().length == 0) {
 		alert('판매가를 입력하세요.');
-		theForm.price2.focus();
-	} else if (theForm.content.value == '') {
+		$('#salePrice').focus();
+	} else if ($('#content').val().length == 0) {
 		alert('상품상세를 입력하세요.');
-		theForm.content.focus();
-	} else if (theForm.image.value == '') {
+		$('#content').focus();
+	} else if ($('#image').val().length == 0) {
 		alert('상품이미지들 입력하세요.');
-		theForm.image.focus();
+		$('#image').focus();
 	} else {
-		theForm.encoding = "multipart/form-data";
-		theForm.price1.value = removeComma(theForm.price1);
-		theForm.price2.value = removeComma(theForm.price2);
-		theForm.price3.value = removeComma(theForm.price3);
+		$('#price').val($('#price').val().replace(/,/gi, ""));
+		$('#salePrice').val($('#salePrice').val().replace(/,/gi, ""));
+		$('#margin').val($('#margin').val().replace(/,/gi, ""));
 
-		// productWrite.jsp 폼 페이지에서 입력받은 값을
-		// 디비에 추가하기 위한 페이지인 product_save.jsp로 이동하되
-		// 입력받은 상품 코드를 쿼리 스트링 형태로 전달한다.
-		// 상품 코드로 폴더를 만들어 거기에 이미지 파일을 업로드한다.
-		theForm.action = "NonageServlet?command=admin_product_write";
-		theForm.submit();
+		$("#frm").attr( "enctype", "multipart/form-data" );
+		$("#frm").attr("action", "adminProductWrite.do");
+	    $('#frm').submit();
 	}
 }
 

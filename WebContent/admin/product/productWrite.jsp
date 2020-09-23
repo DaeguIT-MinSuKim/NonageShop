@@ -12,15 +12,16 @@
 <tr>
   <th>상품분류</th>
   <td colspan="5">
-  <select name="kind">
-    <c:forEach items="${kindList}" var="kind" varStatus="status">
-      <option value="${kine.no}">${kind.name}</option>
+  <select name="kind" id='kind'>
+  	<option value='' disabled selected hidden>상품 종류를 선택하세요...</option>
+    <c:forEach items="${kindList}" var="kind" >
+      <option value="${kind.no}">${kind.name}</option>
    </c:forEach>
   </select>      
 <tr>
   <th>상품명</th>
   <td width="343" colspan="5">
-       <input type="text" name="name" size="47" maxlength="100" value="킬힐">
+       <input type="text" id="name" name="name" size="47" maxlength="100" value="킬힐">
   </td>
 </tr>
 <tr>
@@ -41,14 +42,14 @@
   <tr>
     <th>상세설명</th>
     <td colspan="5">
-      <textarea name="content" rows="8" cols="70" >이뻐요</textarea>
+      <textarea id="content" name="content" rows="8" cols="70" >이뻐요</textarea>
     </td>
   </tr>
   <tr>
     <th>상품이미지</th>
     <td width="343" colspan="5">
 <!--  [2] 파일 업로드를 하기 위한 input 태그는 타입 속성 값을 file로 지정해야 한다.  -->
-      <input type="file" name="image">
+      <input type="file" id="image" name="image">
     </td>
   </tr>    
 </table>
