@@ -5,22 +5,22 @@
 
 <article>
 <h1>상품수정</h1>  
-<form name="frm" method="post" enctype="multipart/form-data">
-<input type="hidden" name="pseq" value="${productVO.pseq}">
+<form id="frm" name="frm" method="post" enctype="multipart/form-data">
+<input type="hidden" name="pno" value="${product.no}">
 <input type="hidden" name="code" >
-<input type="hidden" name="nonmakeImg" value="${productVO.image}">
+<input type="hidden" name="nonmakeImg" value="${product.image}">
 <table id="list">
   <tr>
     <th>상품분류</th>
     <td colspan="5">
-    <select name="kind">
-      <c:forEach items="${kindList}" var="kind" varStatus="status">
+    <select name="kind" id='kind'>
+      <c:forEach items="${kindList}" var="kind" >
         <c:choose>
-          <c:when test="${productVO.kind==status.count}">
-            <option value="${status.count}" selected="selected">${kind}</option>
+          <c:when test="${product.kind+1 == kind.no}">
+            <option value="${kind.no}" selected="selected">${kind.name}</option>
           </c:when>
           <c:otherwise>
-            <option value="${status.count}">${kind}</option>
+            <option value="${kind.no}">${kind.name}</option>
           </c:otherwise>
         </c:choose>
       </c:forEach>
@@ -30,43 +30,43 @@
   <tr>
     <th>상품명</th>
     <td width="343" colspan="5">
-      <input type="text" name="name" size="47" maxlength="100" value="${productVO.name}">
+      <input type="text" id="name" name="name" size="47" maxlength="100" value="${product.name}">
     </td>
   </tr>
   <tr>
     <th>원가[A]</th>
     <td width="70">        
-      <input type="text" name="price1" size="11" onKeyUp='NumFormat(this)' value="${productVO.price1}">
+      <input type="text" id="price" name="price" size="11"  value="${product.price}">
     </td>
     <th>판매가[B]</th>
     <td width="70">
-      <input type="text" name="price2" size="11" onBlur="go_ab()" onKeyUp='NumFormat(this)' value="${productVO.price2}">
+      <input type="text" id="salePrice" name="salePrice" size="11" value="${product.salePrice}">
     </td>
     <th>[B-A]</th>
     <td width="72">
-      <input type="text" name="price3" size="11" readonly onKeyUp='NumFormat(this)'>
+      <input type="text" id="margin" name="margin" size="11" readonly >
     </td>
   </tr>
   <tr>
     <th>베스트상품</th>
     <td>
       <c:choose>
-        <c:when test='${productVO.bestyn=="y"}'>
-          <input type="checkbox" name="bestyn" value="y" checked="checked">
+        <c:when test='${product.bestYn=="y"}'>
+          <input type="checkbox" id="bestYn" name="bestYn" value="y" checked="checked">
         </c:when>
         <c:otherwise>
-          <input type="checkbox" name="bestyn" value="n">
+          <input type="checkbox" id="bestYn" name="bestYn" value="n">
         </c:otherwise>
       </c:choose>
     </td>        
     <th>사용유무</th>
     <td>
       <c:choose>
-        <c:when test='${productVO.useyn=="y"}'>
-          <input type="checkbox" name="useyn" value="y" checked="checked">
+        <c:when test='${product.delYn=="y"}'>
+          <input type="checkbox" id="delYn" name="delYn" value="y" checked="checked">
         </c:when>
       <c:otherwise>
-        <input type="checkbox" name="useyn" value="n">
+        <input type="checkbox" id="delYn" name="delYn" value="n">
       </c:otherwise>
     </c:choose>
     </td>
@@ -74,20 +74,20 @@
   <tr>
     <th>상세설명</th>
     <td colspan="5">
-      <textarea name="content" rows="8" cols="70" >${productVO.content}</textarea>
+      <textarea id="content" name="content" rows="8" cols="70" >${product.content}</textarea>
     </td>
   </tr>
   <tr>
     <th>상품이미지</th>
     <td colspan="5">
-      <img src="product_images/${productVO.image}" width="200pt">     
+      <img src="product_images/${product.image}" width="200pt">     
       <br>
-      <input type="file" name="image">
+      <input type="file" id="image" name="image">
     </td> 
   </tr>    
 </table>
 <input class="btn" type="button" value="수정" onClick="go_mod_save('${tpage}','${productVO.pseq}')">           
-<input class="btn" type="button" value="취소" onClick="go_mov()">
+<input class="btn" type="button" id="cancel" value="취소">
 </form> 
 </article>
 <%@ include file="/admin/footer.jsp"%>

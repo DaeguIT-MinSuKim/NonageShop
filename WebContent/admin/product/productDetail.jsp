@@ -6,7 +6,7 @@
 
 <article>
 <h1>상품 상세 보기</h1> 
-<form name="frm" method="post">
+<form id="frm" name="frm" method="post">
 <table id="list">
   <tr>
     <th>상품분류</th>
