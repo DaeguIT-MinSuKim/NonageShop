@@ -97,7 +97,6 @@ fn_save=function go_save() {
     }
 }
 
-// **************** productDetail.jsp
 fn_modify=function go_mod_save() {
     if ($('#kind option:selected').val().length == 0) {
         alert('상품분류를 선택하세요.');
@@ -131,12 +130,3 @@ fn_modify=function go_mod_save() {
         }
     }
 }
-
-///////////////////
-// 관리자 모드 상품 리스트에서 상품명 검색 추가하기  
-//////////////////
-/*
-function go_mod_mov(tpage, pno) {
-    $("#frm").attr("action", 'adminProductDetail?tpage=' + tpage + "&pno=" + pno);
-    $('#frm').submit();
-}*/

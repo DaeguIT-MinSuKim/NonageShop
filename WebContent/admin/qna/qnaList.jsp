@@ -18,6 +18,12 @@ $(function(){
 <form id="frm" method="post">
 <input type="hidden" name="no">  
 <table id="qnaList">
+  <colgroup>
+	<col style="width:100px;">
+    <col style="width:500px;">
+    <col style="width:200px;">
+    <col style="width:100px;">
+  </colgroup>
   <tr>
     <th>번호(답변여부)</th> <th>제목</th> <th>작성자</th> <th>작성일</th>    
   </tr>
