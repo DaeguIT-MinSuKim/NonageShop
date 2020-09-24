@@ -26,4 +26,12 @@ public class QnAService {
     public int insertqna(QnA qna) {
         return dao.insertqna(qna);
     }
+    
+    public ArrayList<QnA> listAllQnA(){
+        return dao.listAllQnA();
+    }
+    
+    public void updateQnA(QnA qna) {
+        dao.updateQnA(qna);
+    }
 }

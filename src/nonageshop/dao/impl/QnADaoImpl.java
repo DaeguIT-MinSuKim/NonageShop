@@ -85,4 +85,35 @@ public class QnADaoImpl implements QnADao {
         }
     }
 
+    @Override
+    public ArrayList<QnA> listAllQnA() {
+        String sql = "SELECT NO, SUBJECT, CONTENT, REP, ID, REP_YN, WRITE_DATE FROM QNA ORDER BY WRITE_DATE DESC";
+        try (PreparedStatement pstmt = con.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    ArrayList<QnA> list = new ArrayList<QnA>();
+                    do {
+                        list.add(getQnA(rs));
+                    } while (rs.next());
+                    return list;
+                }
+
+        } catch (SQLException e) {
+            throw new CustomSQLException(e);
+        }
+        return null;
+    }
+
+    @Override
+    public void updateQnA(QnA qna) {
+        String sql = "UPDATE QNA SET REP=?, REP_YN='2' WHERE NO=?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, qna.getRep());
+            pstmt.setInt(2, qna.getNo());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new CustomSQLException(e);
+        }
+    }
+
 }

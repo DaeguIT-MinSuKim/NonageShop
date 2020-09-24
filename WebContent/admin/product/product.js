@@ -18,11 +18,12 @@ function go_detail(tpage, pno) {
 }
 
 $(function(){
-    var a = $('#price').val().replace(/,/g, '');
-    var b = $('#salePrice').val().replace(/,/g, '');
-    var ab = parseInt(b) - parseInt(a);
-    $('#margin').val(ab);
-    
+    if ($('#price').length){
+        var a = $('#price').val().replace(/,/g, '');
+        var b = $('#salePrice').val().replace(/,/g, '');
+        var ab = parseInt(b) - parseInt(a);
+        $('#margin').val(ab);
+    }
 	$('#btn_write').on("click", fn_go_wrt);
 	
 	$('#price, #salePrice, #margin').on("keyup", function(){
