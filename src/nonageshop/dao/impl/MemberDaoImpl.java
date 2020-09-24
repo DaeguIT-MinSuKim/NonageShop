@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import nonageshop.dao.MemberDao;
@@ -85,6 +86,28 @@ public class MemberDaoImpl implements MemberDao {
         } catch (SQLException e) {
             throw new CustomSQLException(e);
         }
+    }
+
+    @Override
+    public ArrayList<Member> listMember(String memberName) {
+        String sql = "SELECT ID, PWD, NAME, EMAIL, ZIP_NUM, ADDRESS, PHONE, LEAVE_YN, JOIN_DATE "
+                   + "  FROM MEMBER "
+                   + " WHERE NAME LIKE ?";
+        try (PreparedStatement pstmt = con.prepareStatement(sql)){
+            pstmt.setString(1, "%" + memberName + "%");
+            try(ResultSet rs = pstmt.executeQuery()){
+                if (rs.next()) {
+                    ArrayList<Member> list = new ArrayList<Member>();
+                    do {
+                        list.add(getMember(rs));
+                    }while(rs.next());
+                    return list;
+                }
+            }
+        } catch (SQLException e) {
+            throw new CustomSQLException(e);
+        }
+        return null;
     }
 
 }

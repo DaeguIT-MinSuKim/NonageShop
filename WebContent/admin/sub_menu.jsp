@@ -6,7 +6,7 @@
 <ul>
 <li><a href='adminProductList.do'> 상품리스트</a></li>
 <li><a href='adminOrderList.do'> 주문리스트</a></li>
-<li><a href='NonageServlet?command=admin_member_list'> 회원리스트</a></li>
+<li><a href='adminMemberList.do'> 회원리스트</a></li>
 <li><a href='NonageServlet?command=admin_qna_list'> Q&amp;A리스트</a></li>
 </ul>
 </nav>

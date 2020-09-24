@@ -108,15 +108,5 @@ UPDATE ORDER_DETAIL
  WHERE ONO = 1;
  
 
--- 
-select distinct ono 
-  from order_view 
- where mid='one'  order by ono DESC;
-
-
-SELECT ONO, MID, MNAME, PHONE, ZIP_NUM, ADDRESS, DNO, ORDER_DATE, RESULT, 
-       PNO, PNAME, QUANTITY, SALEPRICE 
-  FROM ORDER_VIEW 
- WHERE MID='one' AND RESULT LIKE '%%%' AND ONO in (select distinct ono 
-													  from order_view 
-													 where mid='one');
+-- 관리자 회원관리
+SELECT ID, PWD, NAME, EMAIL, ZIP_NUM, ADDRESS, PHONE, LEAVE_YN, JOIN_DATE FROM MEMBER WHERE NAME LIKE '%김%'; 

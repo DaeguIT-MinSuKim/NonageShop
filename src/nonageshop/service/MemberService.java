@@ -34,4 +34,8 @@ public class MemberService {
     public Member getMember(String id) {
         return dao.getMember(id);
     }
+    
+    public ArrayList<Member> getMemberList(String memberName){
+        return dao.listMember(memberName);
+    }
 }
