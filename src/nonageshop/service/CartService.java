@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import nonageshop.dao.impl.CartDaoImpl;
 import nonageshop.ds.JdbcUtil;
-import nonageshop.ds.JndiDS;
 import nonageshop.dto.Cart;
 import nonageshop.dto.Member;
 

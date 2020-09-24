@@ -1,7 +1,5 @@
 package nonageshop.dao.impl;
 
-import static org.junit.Assert.fail;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
