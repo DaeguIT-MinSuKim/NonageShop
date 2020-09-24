@@ -31,8 +31,7 @@ public class FrontController extends HttpServlet {
 	    try(InputStream is = config.getServletContext().getResourceAsStream(configFile)){
 	        Properties props = new Properties();
 	        props.load(is);
-	        
-	        
+	       
             for(Entry<Object, Object> entry : props.entrySet()) {
                 System.out.println(entry.getKey() + " : " + entry.getValue());
                 Class<?> cls = Class.forName((String) entry.getValue());

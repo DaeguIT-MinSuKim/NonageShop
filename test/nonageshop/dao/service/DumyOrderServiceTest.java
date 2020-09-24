@@ -13,13 +13,14 @@ import nonageshop.dto.Orders;
 import nonageshop.dto.Product;
 import nonageshop.service.CartService;
 
-public class OrderServiceTest {
-	private OrderService service = new OrderService();
+public class DumyOrderServiceTest {
+
+	private DumyOrderService service = new DumyOrderService();
 	private static Member member;
 	private static ArrayList<Cart> cartlist;
 	
 	@BeforeClass
-	public static void setupBeforeclass() {
+	public static void setUpBeforeClass() throws Exception{
 		CartService cartService = new CartService();
 		
 		member = new Member("two", null);

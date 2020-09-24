@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nonageshop.controller.Command;
-import nonageshop.dao.service.OrderService;
 import nonageshop.dto.Member;
 import nonageshop.dto.OrderDetail;
 import nonageshop.dto.Orders;
+import nonageshop.service.OrderService;
 
 public class OrderDetailHandler implements Command {
-    private OrderService orderService = new OrderService();
+    private OrderService service = new OrderService();
 
     @Override
     public String process(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +27,7 @@ public class OrderDetailHandler implements Command {
             url = "loginform.do";
         } else {
             int orderNo = Integer.parseInt(request.getParameter("no"));
-            Orders orders = orderService.orderListByMember(loginUser.getId(), orderNo, "%");
+            Orders orders = service.orderListByMember(loginUser.getId(), orderNo, "%");
 
             int totalPrice = 0;
             for (OrderDetail od : orders.getDetails()) {

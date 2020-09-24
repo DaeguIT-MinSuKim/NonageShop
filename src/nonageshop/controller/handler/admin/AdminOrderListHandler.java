@@ -11,7 +11,7 @@ import nonageshop.controller.Command;
 import nonageshop.dto.Orders;
 import nonageshop.service.OrderService;
 
-public class AdminOrderListActionHandler implements Command {
+public class AdminOrderListHandler implements Command {
     private OrderService service = new OrderService();
     
     @Override

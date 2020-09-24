@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nonageshop.controller.Command;
-import nonageshop.dao.service.OrderService;
 import nonageshop.dto.Member;
 import nonageshop.dto.OrderDetail;
 import nonageshop.dto.Orders;
+import nonageshop.service.OrderService;
 
 public class OrderListHandler implements Command {
 	private OrderService service = new OrderService();

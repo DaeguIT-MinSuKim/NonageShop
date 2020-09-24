@@ -5,24 +5,42 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import nonageshop.dao.CartDao;
-import nonageshop.dao.OrderDao;
 import nonageshop.dao.impl.CartDaoImpl;
 import nonageshop.dao.impl.OrderDaoImpl;
 import nonageshop.ds.JndiDS;
+import nonageshop.dto.Member;
 import nonageshop.dto.OrderDetail;
 import nonageshop.dto.Orders;
 
 public class OrderService {
-    private OrderDao orderDao = OrderDaoImpl.getInstance();
-    private CartDao cartDao = CartDaoImpl.getInstance();
+    private OrderDaoImpl orderDao = OrderDaoImpl.getInstance();
+    private CartDaoImpl cartDao = CartDaoImpl.getInstance();
+    
+    private Connection con = JndiDS.getConnection();
+    
+    public OrderService() {
+    	orderDao.setCon(con);
+    	cartDao.setCon(con);
+	}
+    
+    public ArrayList<Integer> selectSeqOrderIng(Member member){
+    	return orderDao.selectSeqOrderIng(member);
+    }
+    
+    public Orders orderListByMember(String memberId, int orderNo, String result) {
+    	return orderDao.listOrderByMember(memberId, orderNo, result);
+    }
+    
+    public int maxOrderNo() {
+    	return orderDao.selectMaxOrdersNo();
+    }
     
     public ArrayList<Orders> listOrders(String memberName){
         return orderDao.listOrders(memberName);
     }
     
     public int updateOrderResult(int orderNo) {
-        return updateOrderResult(orderNo);
+        return orderDao.updateOrderResult(orderNo);
     }
     
     public int addOrderAndDetail(Orders orders) {

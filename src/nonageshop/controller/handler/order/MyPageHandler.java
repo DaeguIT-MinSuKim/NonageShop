@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nonageshop.controller.Command;
-import nonageshop.dao.service.OrderService;
 import nonageshop.dto.Member;
 import nonageshop.dto.Orders;
+import nonageshop.service.OrderService;
 
 public class MyPageHandler implements Command {
 	private OrderService orderService = new OrderService();
@@ -29,7 +29,6 @@ public class MyPageHandler implements Command {
 			ArrayList<Orders> orders = new ArrayList<Orders>();
 			for (int orderNo : orderNoList) {
 				orders.add(orderService.orderListByMember(loginUser.getId(), orderNo, "1"));
-				
 			}
 			request.setAttribute("title", "진행 중인 주문 내역");
 			request.setAttribute("ordersList", orders);

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nonageshop.controller.Command;
-import nonageshop.dao.service.OrderService;
 import nonageshop.dto.Member;
 import nonageshop.dto.Orders;
+import nonageshop.service.OrderService;
 
 public class OrderAllHandler implements Command {
     private OrderService orderService = new OrderService();

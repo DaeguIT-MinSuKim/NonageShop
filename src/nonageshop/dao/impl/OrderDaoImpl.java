@@ -49,7 +49,7 @@ public class OrderDaoImpl implements OrderDao {
                     member.setAddress(rs.getString("ADDRESS"));
                     orders.setMember(member);
                     
-                   ArrayList<OrderDetail> details = new ArrayList<OrderDetail>();
+                    ArrayList<OrderDetail> details = new ArrayList<OrderDetail>();
                     do {
                         details.add(getOrderDetail(rs));
                     }while(rs.next());

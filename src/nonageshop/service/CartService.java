@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import nonageshop.dao.impl.CartDaoImpl;
+import nonageshop.ds.JdbcUtil;
 import nonageshop.ds.JndiDS;
 import nonageshop.dto.Cart;
 import nonageshop.dto.Member;
 
 public class CartService {
-	private Connection con = JndiDS.getConnection();
-//	private Connection con = JdbcUtil.getConnection();
+	private Connection con = JdbcUtil.getConnection();
+//	private Connection con = JndiDS.getConnection();
     private CartDaoImpl dao = CartDaoImpl.getInstance();
     
     public CartService() {
