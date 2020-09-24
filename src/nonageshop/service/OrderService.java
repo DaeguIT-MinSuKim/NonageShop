@@ -23,8 +23,8 @@ public class OrderService {
     	cartDao.setCon(con);
 	}
     
-    public ArrayList<Integer> selectSeqOrderIng(Member member){
-    	return orderDao.selectSeqOrderIng(member);
+    public ArrayList<Integer> selectSeqOrderIng(Member member, String result){
+    	return orderDao.selectSeqOrderIng(member, result);
     }
     
     public Orders orderListByMember(String memberId, int orderNo, String result) {

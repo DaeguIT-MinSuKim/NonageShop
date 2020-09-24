@@ -25,7 +25,7 @@ public class MyPageHandler implements Command {
 		if (loginUser == null) {
 			url = "loginform.do";
 		} else {
-			ArrayList<Integer> orderNoList = orderService.selectSeqOrderIng(loginUser);
+			ArrayList<Integer> orderNoList = orderService.selectSeqOrderIng(loginUser, "1");
 			ArrayList<Orders> orders = new ArrayList<Orders>();
 			for (int orderNo : orderNoList) {
 				orders.add(orderService.orderListByMember(loginUser.getId(), orderNo, "1"));

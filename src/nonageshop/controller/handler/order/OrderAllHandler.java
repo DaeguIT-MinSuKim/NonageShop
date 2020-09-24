@@ -27,11 +27,12 @@ public class OrderAllHandler implements Command {
             url = "loginform.do";
         } else {
             
-            ArrayList<Integer> oseqList = orderService.selectSeqOrderIng(loginUser);
-            
+            ArrayList<Integer> oseqList = orderService.selectSeqOrderIng(loginUser, "%");
+            System.out.println("oseqList > " + oseqList);
             ArrayList<Orders> ordersList = new ArrayList<Orders>();
             for (int orderNo : oseqList) {
                 Orders orders = orderService.orderListByMember(loginUser.getId(), orderNo, "%");
+                System.out.println("orders > " + orders);
                 ordersList.add(orders);
             }
             request.setAttribute("title", "총 주문 내역");

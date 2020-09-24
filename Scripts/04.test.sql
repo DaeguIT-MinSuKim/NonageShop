@@ -106,3 +106,17 @@ SELECT * FROM ORDER_DETAIL WHERE ono = 1;
 UPDATE ORDER_DETAIL 
    SET RESULT_YN = '2'
  WHERE ONO = 1;
+ 
+
+-- 
+select distinct ono 
+  from order_view 
+ where mid='one'  order by ono DESC;
+
+
+SELECT ONO, MID, MNAME, PHONE, ZIP_NUM, ADDRESS, DNO, ORDER_DATE, RESULT, 
+       PNO, PNAME, QUANTITY, SALEPRICE 
+  FROM ORDER_VIEW 
+ WHERE MID='one' AND RESULT LIKE '%%%' AND ONO in (select distinct ono 
+													  from order_view 
+													 where mid='one');

@@ -66,12 +66,13 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public ArrayList<Integer> selectSeqOrderIng(Member member) {
+    public ArrayList<Integer> selectSeqOrderIng(Member member, String result) {
         String sql ="select distinct ono "
         		  + "  from order_view "
-        		  + " where mid=? and result='1' order by ono DESC";
+        		  + " where mid=? and result like ? order by ono DESC";
         try (PreparedStatement pstmt = con.prepareStatement(sql)){
-        	pstmt.setNString(1, member.getId());
+        	pstmt.setString(1, member.getId());
+        	pstmt.setString(2, "%" + result + "%");
         	try(ResultSet rs = pstmt.executeQuery()){
         		if (rs.next()) {
         			ArrayList<Integer> orderNo=new ArrayList<Integer>();
