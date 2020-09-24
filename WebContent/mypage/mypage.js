@@ -24,7 +24,8 @@ $(function(){
     });
     
     $('#goorder').on("click", function(){
-        go_order();
+        $("#cartform").attr("action", "mypage.do");
+        $('#cartform').submit();
     });
     
     $('#go_order_insert').on("click", function(){
@@ -34,7 +35,7 @@ $(function(){
 });
 
 
-function go_order_delete() {
+/*function go_order_delete() {
   var count = 0;
 
   if (document.formm.oseq.length == undefined) {
@@ -61,3 +62,4 @@ function go_order() {
   document.formm.action = "NonageServlet?command=mypage";
   document.formm.submit();
 }
+*/

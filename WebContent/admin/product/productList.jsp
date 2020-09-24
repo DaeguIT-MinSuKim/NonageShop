@@ -11,8 +11,8 @@
   <td width="642">
       상품명 
      <input type="text" name="key">
-     <input class="btn" type="button" name="btn_search" value="검색" onClick="go_search()">
-     <input class="btn" type="button" name="btn_total" value="전체보기 " onClick="go_total()">
+     <input class="btn" type="button" id="btn_search" name="btn_search" value="검색" >
+     <input class="btn" type="button" id="btn_total" name="btn_total" value="전체보기 " >
      <input class="btn" type="button" id="btn_write" value="상품등록" >
   </td>
   </tr>
@@ -32,7 +32,7 @@
     <tr>
       <td height="23" align="center" >${product.no}</td>
       <td style="text-align: left; padding-left: 50px; padding-right: 0px;">   
-        <a href="#" onClick="go_detail('${tpage}', '${product.no}')">${product.name} </a>
+        <a href="#" class="detail" data-info='["${tpage}", "${product.no}"]'>${product.name} </a>
    	  </td>
       <td><fmt:formatNumber value="${product.price}"/></td>
       <td><fmt:formatNumber value="${product.salePrice}"/></td>

@@ -27,7 +27,6 @@
 					<img src="admin/images/text.gif">
 				</a>
 			</div>	
-			<input class="btn" type="button"  value="logout"  style="float: right;"
-			   onClick="location.href='adminLogout.do'">			
+			<input class="btn" type="button"  value="logout"  style="float: right;"  onClick="location.href='adminLogout.do'">			
 		</header>
 		<div class="clear"></div>

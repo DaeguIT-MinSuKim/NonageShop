@@ -86,7 +86,7 @@
     </td> 
   </tr>    
 </table>
-<input class="btn" type="button" value="수정" onClick="go_mod_save('${tpage}','${productVO.pseq}')">           
+<input class="btn" type="button" id="modify" value="수정">           
 <input class="btn" type="button" id="cancel" value="취소">
 </form> 
 </article>

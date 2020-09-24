@@ -42,9 +42,9 @@
      
 </table>
 <!--[8] 수정 버튼이 눌리면 상품 수정 페이지로 이동하되 현재 페이지와 상품 일련번호 값을 전달해 준다. --> 
-<input class="btn"  type="button" value="수정" onClick="go_mod('${tpage}','${product.no}')">
+<input class="btn"  type="button" id="modifyPdt" value="수정" data-info='["${tpage}", "${product.no}"]'>
 <!--[9] 목록 버튼이 눌리면 상품 리스트 페이지로 이동하되 현재 페이지를 전달해 준다. --> 
-<input class="btn"  type="button" value="목록" onClick="go_list('${tpage}')">           
+<input class="btn"  type="button" id="prevList" value="목록" data-info="${tpage}">           
 </form>
 </article>
 <%@ include file="/admin/footer.jsp"%>
