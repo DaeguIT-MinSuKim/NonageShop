@@ -16,7 +16,7 @@
     <select name="kind" id='kind'>
       <c:forEach items="${kindList}" var="kind" >
         <c:choose>
-          <c:when test="${product.kind+1 == kind.no}">
+          <c:when test="${product.kind == kind.no}">
             <option value="${kind.no}" selected="selected">${kind.name}</option>
           </c:when>
           <c:otherwise>

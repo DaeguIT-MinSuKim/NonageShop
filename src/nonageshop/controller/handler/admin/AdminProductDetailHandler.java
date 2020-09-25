@@ -41,7 +41,8 @@ public class AdminProductDetailHandler implements Command {
         request.setAttribute("tpage", tpage);
         
         int index=Integer.parseInt(product.getKind().trim());
-        request.setAttribute("kind", kindList.get(index));
+        System.out.println("index > " + index + " kind " + product.getKind());
+        request.setAttribute("kind", kindList.get(index-1));
 
         return url;
     }
